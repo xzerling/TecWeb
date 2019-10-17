@@ -41,6 +41,7 @@ CREATE TABLE Contenido(
 );
 
 CREATE TABLE InstanciaAsignatura(
+	seccion text NOT NULL,
 	semestre int NOT NULL,
 	anio int NOT NULL,
 	refAsignatura int NOT NULL REFERENCES Asignatura(id)
