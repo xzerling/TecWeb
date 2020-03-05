@@ -1,8 +1,3 @@
-
-/**
-Script para crear Base de Datos
-**/ 
-
 CREATE TABLE Administrador(
 	correo varchar(32) NOT NULL PRIMARY KEY,
 	nombre varchar(32) NOT NULL,
@@ -96,7 +91,8 @@ CREATE TABLE Evaluacion(
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	fecha DATE NOT NULL,
 	diasAntes int NOT NULL,
-	diasDespues int NOT NULL
+	diasDespues int NOT NULL,
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
 );
 
 CREATE TABLE Reunion(
@@ -116,15 +112,7 @@ CREATE TABLE CalificarEvaluacion(
 
 CREATE TABLE RealizarReunion(
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	refAsignatura int NOT NULL REFERENCES Asignatura(id),
-	semestre int NOT NULL,
-	anio int NOT NULL,
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id),
 	refReunion int NOT NULL REFERENCES Reunion(id),
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula)
 );
-
-CREATE TABLE EvaluacionAsignatura(
-	refEvaluacion int NOT NULL REFERENCES Evaluacion(id),
-	refInstAsignatura int NOT NULL refEvaluacion InstanciaAsignatura(id)
-);
-
