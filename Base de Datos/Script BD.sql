@@ -43,6 +43,7 @@ CREATE TABLE Contenido(
 );
 
 CREATE TABLE InstanciaAsignatura(
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	seccion text NOT NULL,
 	semestre int NOT NULL,
 	anio int NOT NULL,
@@ -107,12 +108,10 @@ CREATE TABLE Reunion(
 
 CREATE TABLE CalificarEvaluacion(
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	refAsignatura int NOT NULL REFERENCES Asignatura(id),
-	semestre int NOT NULL,
-	anio int NOT NULL,
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id),
 	refEvaluacion int NOT NULL REFERENCES Evaluacion(id),
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula),
-	nota decimal NOT NULL
+	nota double(2,1) NOT NULL
 );
 
 CREATE TABLE RealizarReunion(
@@ -124,4 +123,8 @@ CREATE TABLE RealizarReunion(
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula)
 );
 
+CREATE TABLE EvaluacionAsignatura(
+	refEvaluacion int NOT NULL REFERENCES Evaluacion(id),
+	refInstAsignatura int NOT NULL refEvaluacion InstanciaAsignatura(id)
+);
 
