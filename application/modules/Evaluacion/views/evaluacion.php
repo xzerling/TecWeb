@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>Vista Evaluacion</title>
 
 	<style type="text/css">
 
@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<h1>Welcome to Módulo Evaluacion</h1>
 
 	<div id="body">
 		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
@@ -83,26 +83,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-
-	<form method="post" action="<?=base_url()?>index.php/cambio">
-		<button type="submit">Cambio</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/asignatura">
-		<button type="submit">Asignaturas</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/desempeno">
-		<button type="submit">Desempeño</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/evaluacion">
-		<button type="submit">Evaluacion</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/reunion">
-		<button type="submit">Reunion</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/notificacion">
-		<button type="submit">Notificacion</button>
-	</form>
 </div>
-
 </body>
 </html>
