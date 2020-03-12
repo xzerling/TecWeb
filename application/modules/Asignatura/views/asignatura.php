@@ -3,6 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<meta charset="utf-8">
 	<title>Vista Asignatura</title>
 
@@ -70,24 +74,107 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
 	<h1>Welcome to Módulo Asignatura</h1>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+	<div id=asignaturas">
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+    <table class="table table-striped">
+	<th>Nombre</th>
+	<th>Estado</th>
+	<th></th>
+	<th></th>
+	<?$i=0;foreach($asignaturas as $row):?>
+		<tr>
+			<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
+				<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
+				<p><?=$row['nombre']?></p>
+			</td>
+			<td><input type="hidden" id="estado<?=$i?>" value="<?=$row['estado']?>" readonly>
+				<p><?=$row['estado']?></p>
+			</td>
+			
+			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
+			<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
+		</tr>
+	<?$i++;endforeach;?>
+	</table>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
+
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
 
-	<form method="get" action="<?=base_url()?>index.php/crearAsignatura">
-		<button type="submit">InsertAsignatura</button>
-	</form>
+	
+
+	<div id="myModal1" style="display: none;" class="modal" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5>Editar</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+			</div>
+			<div class="modal-body">
+				
+
+			<div class="form-group">
+				<label for="nombreEdit" class="col-lg-2 control-label">Nombre</label>
+				<div class="col-lg-10">
+					<input type="text" class ="form-control" id="nombreEdit">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="estadoEdit" class="col-lg-2 control-label">Estado</label>
+				<div class="col-lg-10">
+					<input type="text" class ="form-control" id="estadoEdit">
+				</div>
+			</div>
+
+
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+				<button class="btn btn-success" onclick="guardarCambios()">Guardar</button>
+			</div>
+		</div>
+	</div>
+	
+</div>
+	
 
 </body>
 </html>
+
+<script type="text/javascript">
+
+	function editar(indice){
+		console.log("editar")
+		console.log(indice);
+		//$("#idEdit").val($("#id"+indice).val());
+		$("#nombreEdit").val($("#nombre"+indice).val());
+		$("#estadoEdit").val($("#estado"+indice).val());
+		$("#myModal1").modal('show');
+	}
+
+		function guardarCambios() {
+		var id 		= $("#idEdit").val();
+		var nombre 	= $("#nombreEdit").val();
+		var estado 	= $("#estadoEdit").val();
+		$.post(
+			base_url+"asignatura/guardarCambios",
+			{
+				id:id,
+				nombre:nombre,
+				estado: estado
+			},function(){
+				$("#myModal1").modal('hide');
+				$("#listado").hide('slow');
+				cargarDatos();
+				$("#listado").show('slow');
+			}
+		);
+	}
+
+
+</script>

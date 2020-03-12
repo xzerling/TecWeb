@@ -18,22 +18,34 @@ class Asignatura extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-
-
-	public function crearAsignatura()
+	function __construct()
     {
-    	$this->load->database();
-        $crud = new grocery_CRUD();
+        parent::__construct();
+ 		$this->load->model("modelo");
+        $this->load->database();
  
-        $crud->set_table('asignatura');
-        $output = $crud->render();
-        
- 
-        $this->index($output);                
     }
+
 
 	public function index($output = null)
 	{
-		$this->load->view('asignatura', $output);
+		/*$crud = new grocery_CRUD();
+ 
+        $crud->set_table('asignatura');
+        $crud->columns('id','nombre','estado');
+        $output = $crud->render();*/
+
+        
+        $output = $this->modelo->cargarDatos();
+
+		$data['asignaturas'] = $output;
+		/*foreach ($output as $asignatura)
+		{
+		        echo $asignatura['nombre'] . '<br />';
+
+		}*/
+
+        
+		$this->load->view('asignatura', $data);
 	}
 }
