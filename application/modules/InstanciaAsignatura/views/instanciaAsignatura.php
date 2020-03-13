@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<meta charset="utf-8">
-	<title>Vista Asignatura</title>
+	<title>Vista Asignaturas</title>
 
 	<style type="text/css">
 
@@ -73,23 +73,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="listado">
 <div id="container">
-	<h1>Vista Asignaturas BD</h1>
+	<h1>Módulo Asignaturas</h1>
 
 	<div id="asignaturas">
-
     <table class="table table-striped">
 	<th>Nombre</th>
-	<th>Estado</th>
+	<th>Seccion</th>
+	<th>Semestre</th>
+	<th>Anio</th>
 	<th></th>
 	<th></th>
 	<?$i=0;foreach($asignaturas as $row):?>
 		<tr>
 			<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
+				<input type="hidden" id="refAsignatura<?=$i?>" value="<?=$row['refAsignatura']?>" readonly>
 				<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
 				<p><?=$row['nombre']?></p>
 			</td>
-			<td><input type="hidden" id="estado<?=$i?>" value="<?=$row['estado']?>" readonly>
-				<p><?=$row['estado']?></p>
+
+			<td><input type="hidden" id="seccion<?=$i?>" value="<?=$row['seccion']?>" readonly>
+				<p><?=$row['seccion']?></p>
+			</td>
+
+			<td><input type="hidden" id="semestre<?=$i?>" value="<?=$row['semestre']?>" readonly>
+				<p><?=$row['semestre']?></p>
+			</td>
+
+			<td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
+				<p><?=$row['anio']?></p>
 			</td>
 			
 			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
@@ -122,15 +133,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="form-group">
 				<label for="nombreEdit" class="col-lg-2 control-label">Nombre</label>
 				<input type="hidden" id="idEdit">
+				<input type="hidden" id="refAsignaturaEdit">
 				<div class="col-lg-10">
-					<input type="text" class ="form-control" id="nombreEdit">
+					<input type="text" class ="form-control" id="nombreEdit" disabled="disabled">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label for="estadoEdit" class="col-lg-2 control-label">Estado</label>
+				<label for="seccionEdit" class="col-lg-2 control-label">Seccion</label>
 				<div class="col-lg-10">
-					<input type="text" class ="form-control" id="estadoEdit">
+					<input type="text" class ="form-control" id="seccionEdit">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="semestreEdit" class="col-lg-2 control-label">Semestre</label>
+				<div class="col-lg-10">
+				<select id="semestreEdit" class="form-control">
+						<option value="1">Otoño</option>
+						<option value="2">Primavera</option>
+						<option value="3">Verano</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="anioEdit" class="col-lg-2 control-label">Año</label>
+				<div class="col-lg-10">
+					<input type="text" class ="form-control" id="anioEdit">
 				</div>
 			</div>
 
@@ -155,15 +185,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		console.log("editar")
 		console.log(indice);
 		$("#idEdit").val($("#id"+indice).val());
+		$("#refAsignaturaEdit").val($("#refAsignatura"+indice).val());
 		$("#nombreEdit").val($("#nombre"+indice).val());
-		$("#estadoEdit").val($("#estado"+indice).val());
+		$("#seccionEdit").val($("#seccion"+indice).val());
+		$("#semestreEdit").val($("#semestre"+indice).val());
+		$("#anioEdit").val($("#anio"+indice).val());
 		$("#myModal1").modal('show');
 	}
 
 	function cargarDatos(){
 		var base_url = "<? echo base_url()?>";
 		$.post(
-			base_url+"index.php/asignatura/cargarDatos",
+			base_url+"index.php/instanciaAsignatura/cargarDatos",
 			{},
 			function(url,data){
 				$("#listado").html(url,data);
@@ -173,16 +206,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		function guardarCambios() {
 		var id 		= $("#idEdit").val();
-		var nombre 	= $("#nombreEdit").val();
-		var estado 	= $("#estadoEdit").val();
+		var seccion = $("#seccionEdit").val();
+		var semestre= $("#semestreEdit").val();
+		var anio 	= $("#anioEdit").val();
+		var refAsignatura = $("#refAsignaturaEdit").val();
+
 		var base_url = "<? echo base_url()?>";
-		console.log(id, nombre, estado);
 		$.post(
-			base_url+"index.php/asignatura/guardarCambios",
+			base_url+"index.php/instanciaAsignatura/guardarCambios",
 			{
 				id:id,
-				nombre:nombre,
-				estado: estado
+				seccion: seccion,
+				semestre: semestre,
+				anio: anio,
+				refAsignatura: refAsignatura
 			},function(){
 				$("#myModal1").modal('hide');
 				$("#listado").hide('slow');
@@ -198,7 +235,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		console.log("eliminar");
 		console.log($("#id"+indice).val());
 		$.post(
-			base_url+"index.php/asignatura/eliminarDato",
+			base_url+"index.php/instanciaAsignatura/eliminarDato",
 			{id:$("#id"+indice).val()},
 			function(){
 				//alert("Dato Eliminar");
