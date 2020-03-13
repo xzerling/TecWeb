@@ -20,6 +20,47 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		
+		if ($this->session->userdata('login')){
+			if ($this->session->userdata('perfil')== 1) {
+				$this->load->view('header');
+				//$this->load->view('admin/admin');
+				$this->load->view('fother');
+			}
+			if ($this->session->userdata('perfil')== 2) {
+				//$data = $this->session->userdata('nombre');
+				$this->load->view('header');
+				$this->load->view('super',$data);
+				$this->load->view('fother');
+			}
+		}else{
+				$data = $this->session->userdata('Nombre');
+				$this->load->view('header',$data);
+				$this->load->view('login');
+				$this->load->view('listProfe');
+				$this->load->view('logProfe');
+				$this->load->view('fother');
+		}
+		
+
+		//$this->load->view('welcome_message');
+	}
+
+	function loginf (){
+		/*
+		$rut = $this->input-> post('rut');
+		$clave = $this->input-> post('clave');
+		$data['rut'] = $rut;
+		$login = FALSE;
+		$login = $this->modelo->validarUsuario($rut, md5($clave));
+		$data['perfil'] =  $this->modelo->buscarPerfil($rut, md5($clave));
+		$data['login'] = $login;
+		*/
+		$data['perfil'] = 2;
+		$data['rut'] = "11 111.111-1";
+		$data['Nombre'] = "Nombre USuario";
+		$data['login'] = TRUE;
+		$this->session->set_userdata($data);
+		$this->index();
 	}
 }
