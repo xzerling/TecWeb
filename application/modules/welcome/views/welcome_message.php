@@ -87,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<form method="post" action="<?=base_url()?>index.php/cambio">
 		<button type="submit">Cambio</button>
 	</form>
-	<form method="post" action="<?=base_url()?>index.php/asignatura">
+	<form method="post" action="<?=base_url()?>index.php/instanciaAsignatura">
 		<button type="submit">Asignaturas</button>
 	</form>
 	<form method="post" action="<?=base_url()?>index.php/desempeno">
