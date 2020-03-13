@@ -26,6 +26,25 @@ class InstanciaAsignatura extends MY_Controller {
  
     }
 
+    public function crearAsignatura()
+	{
+		$seccion = $this->input->post("seccion");
+		$semestre 	= $this->input->post("semestre");
+		$anio 	= $this->input->post("anio");
+		$refInstanciaAsignatura	= $this->input->post("refInstanciaAsignatura");
+
+
+		$this->modelo->guardarDatos($seccion, $semestre, $anio, $refInstanciaAsignatura);
+		redirect(base_url('index.php/instanciaAsignatura'));
+	}
+
+    function crear()
+	{
+		$data['asignaturas'] = $this->modelo->obtenerAsignaturas();
+
+		$this->load->view('crear', $data);
+	}
+
     function cargarDatos(){
 
 		$output = $this->modelo->cargarDatos();

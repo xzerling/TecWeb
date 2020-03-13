@@ -75,20 +75,26 @@ class modelo extends CI_Model{
 		return $output; 
 	} 
 
+	public function obtenerAsignaturas(){
+		$query = "select id, nombre from asignatura
+		 where estado = 1";
+
+		$resultado = $this->db->query($query)->result_array();
+		return $resultado;
+	}
+
 	function eliminarDato($id){
 		$this->db->where("id",$id);
 		$this->db->delete('InstanciaAsignatura');
 	}
-	function guardarDatos($avatar, $nombre, $rut, $clave, $perfil, $telefono, $correo){
-		$data['avatar'] = $avatar;
-		$data['nombre']=$nombre;
-		$data['rut'] = $rut;
-		$data['clave'] = $clave;
-		$data['perfil'] = $perfil;
-		$data['telefono'] = $telefono;
-		$data['correo'] = $correo;
+	function guardarDatos($seccion, $semestre, $anio, $refInstanciaAsignatura){
+		$data['seccion'] = $seccion;
+		//echo $seccion;
+		$data['semestre']=$semestre;
+		$data['anio'] = $anio;
+		$data['refAsignatura'] = $refInstanciaAsignatura;
 
-		$this->db->insert('login',$data);
+		$this->db->insert('instanciaasignatura',$data);
 	}
 	function guardarCambiosEx($id, $avatar, $nombre, $rut, $perfil, $telefono, $correo){
 		$data['avatar'] = $avatar;
