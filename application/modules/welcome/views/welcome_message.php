@@ -102,6 +102,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<form method="post" action="<?=base_url()?>index.php/notificacion">
 		<button type="submit">Notificacion</button>
 	</form>
+	<form method="post" action="<?= base_url()?>index.php/observacion">
+		<button type="submit">Observacion</button>
+	</form>
 </div>
 
 </body>
