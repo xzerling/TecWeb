@@ -1,3 +1,4 @@
+
 TRUNCATE TABLE Administrador;
 TRUNCATE TABLE Profesor;
 TRUNCATE TABLE Ayudante;
