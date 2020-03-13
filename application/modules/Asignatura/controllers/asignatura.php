@@ -43,6 +43,11 @@ class Asignatura extends MY_Controller {
 		$this->modelo->guardarCambios($id, $nombre, $estado);
 	}
 
+	function eliminarDato(){
+		$id = $this->input->post("id");
+		$this->modelo->eliminarDato($id);
+	}
+
 	public function index($output = null)
 	{
 		/*$crud = new grocery_CRUD();

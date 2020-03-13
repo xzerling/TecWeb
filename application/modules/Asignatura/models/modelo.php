@@ -71,9 +71,9 @@ class modelo extends CI_Model{
 
 		return $output;
 	}
-	function eliminarDato($nombre){
-		$this->db->where("nombre",$nombre);
-		$this->db->delete('login');
+	function eliminarDato($id){
+		$this->db->where("id",$id);
+		$this->db->delete('asignatura');
 	}
 	function guardarDatos($avatar, $nombre, $rut, $clave, $perfil, $telefono, $correo){
 		$data['avatar'] = $avatar;

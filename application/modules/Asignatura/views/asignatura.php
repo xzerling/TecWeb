@@ -193,5 +193,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		);
 	}
 
+	function eliminar(indice){
+		var base_url = "<? echo base_url()?>";
+		console.log("eliminar");
+		console.log($("#id"+indice).val());
+		$.post(
+			base_url+"index.php/asignatura/eliminarDato",
+			{id:$("#id"+indice).val()},
+			function(){
+				//alert("Dato Eliminar");
+				$("#listado").hide('slow');
+				cargarDatos();
+				$("#listado").show('slow');
+			}
+		)
+	}
+
 
 </script>
