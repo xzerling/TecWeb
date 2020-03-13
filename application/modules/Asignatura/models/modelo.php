@@ -65,6 +65,7 @@ class modelo extends CI_Model{
     }
 
 	function cargarDatos(){
+		$this->load->helper('url');
 		$query = "select * from asignatura";
 		$output = $this->db->query($query)->result_array();
 
@@ -85,7 +86,7 @@ class modelo extends CI_Model{
 
 		$this->db->insert('login',$data);
 	}
-	function guardarCambios($id, $avatar, $nombre, $rut, $perfil, $telefono, $correo){
+	function guardarCambiosEx($id, $avatar, $nombre, $rut, $perfil, $telefono, $correo){
 		$data['avatar'] = $avatar;
 		$data['nombre']=$nombre;
 		$data['rut'] = $rut;
@@ -98,17 +99,13 @@ class modelo extends CI_Model{
 		$this->db->update("login",$data);
 	}
 
-	function guardarCambiosEx($id, $avatar, $nombre, $rut, $clave, $perfil, $telefono, $correo){
-		$data['avatar'] = $avatar;
+	function guardarCambios($id, $nombre, $estado){
+		//$this->load->helper('url');
 		$data['nombre']=$nombre;
-		$data['rut'] = $rut;
-		$data['clave'] = $clave;
-		$data['perfil'] = $perfil;
-		$data['telefono'] = $telefono;
-		$data['correo'] = $correo;
+		$data['estado'] = $estado;
 
 		$this->db->where("id",$id);
-		$this->db->update("login",$data);
+		$this->db->update("asignatura",$data);
 	}
 
 	public function numPostUs(){

@@ -26,6 +26,22 @@ class Asignatura extends MY_Controller {
  
     }
 
+    function cargarDatos(){
+
+		$output = $this->modelo->cargarDatos();
+
+		$data['asignaturas'] = $output;
+        
+		$this->load->view('asignatura', $data);
+	}
+
+    function guardarCambios(){
+		$id  	= $this->input->post("id");
+		$nombre = $this->input->post("nombre");
+		$estado = $this->input->post("estado");
+
+		$this->modelo->guardarCambios($id, $nombre, $estado);
+	}
 
 	public function index($output = null)
 	{
@@ -39,12 +55,6 @@ class Asignatura extends MY_Controller {
         $output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-		/*foreach ($output as $asignatura)
-		{
-		        echo $asignatura['nombre'] . '<br />';
-
-		}*/
-
         
 		$this->load->view('asignatura', $data);
 	}

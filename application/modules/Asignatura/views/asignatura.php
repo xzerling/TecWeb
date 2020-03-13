@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<meta charset="utf-8">
@@ -71,10 +71,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
+<div id="listado">
 <div id="container">
 	<h1>Welcome to Módulo Asignatura</h1>
 
-	<div id=asignaturas">
+	<div id="asignaturas">
 
     <table class="table table-striped">
 	<th>Nombre</th>
@@ -102,6 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
+</div>
 
 	
 
@@ -119,6 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<div class="form-group">
 				<label for="nombreEdit" class="col-lg-2 control-label">Nombre</label>
+				<input type="hidden" id="idEdit">
 				<div class="col-lg-10">
 					<input type="text" class ="form-control" id="nombreEdit">
 				</div>
@@ -151,18 +154,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	function editar(indice){
 		console.log("editar")
 		console.log(indice);
-		//$("#idEdit").val($("#id"+indice).val());
+		$("#idEdit").val($("#id"+indice).val());
 		$("#nombreEdit").val($("#nombre"+indice).val());
 		$("#estadoEdit").val($("#estado"+indice).val());
 		$("#myModal1").modal('show');
+	}
+
+	function cargarDatos(){
+		var base_url = "<? echo base_url()?>";
+		$.post(
+			base_url+"index.php/asignatura/cargarDatos",
+			{},
+			function(url,data){
+				$("#listado").html(url,data);
+			}
+		);
 	}
 
 		function guardarCambios() {
 		var id 		= $("#idEdit").val();
 		var nombre 	= $("#nombreEdit").val();
 		var estado 	= $("#estadoEdit").val();
+		var base_url = "<? echo base_url()?>";
+		console.log(id, nombre, estado);
 		$.post(
-			base_url+"asignatura/guardarCambios",
+			base_url+"index.php/asignatura/guardarCambios",
 			{
 				id:id,
 				nombre:nombre,
@@ -170,6 +186,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			},function(){
 				$("#myModal1").modal('hide');
 				$("#listado").hide('slow');
+				//cambiar cargar datos
 				cargarDatos();
 				$("#listado").show('slow');
 			}
