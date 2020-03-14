@@ -1,4 +1,6 @@
 
+TRUNCATE TABLE CalificarEvaluacion;
+TRUNCATE TABLE Evaluacion;
 TRUNCATE TABLE Administrador;
 TRUNCATE TABLE Profesor;
 TRUNCATE TABLE Ayudante;
@@ -67,9 +69,10 @@ INSERT INTO Asignatura (id, nombre, estado)
 		   ('3', 'Diseño De Base De Datos', '1'),
 		   ('4', 'Ing. economica y ev. de Proyectos', '1'),
 		   ('5', 'Fisica I', '1'),
-		   ('6', 'Visualizacion de datos', '0'),
+		   ('6', 'Visualizacion de datos', '1'),
 		   ('7', 'Ingles I', '1'),
-		   ('8', 'Algoritmos y estructuras de datos', '0')
+		   ('8', 'Algoritmos y estructuras de datos', '1'),
+		   ('9', 'Calculo III', '0')
 ;
 
 INSERT INTO Contenido(id, refAsignatura, descripcion)
@@ -85,13 +88,20 @@ INSERT INTO InstanciaAsignatura(id, seccion, semestre, anio, refAsignatura)
 	VALUES ('1', 'C', '1', '2010', '7'),
 		   ('2', 'B', '1', '2010', '7'),
 		   ('3', 'A', '1', '2010', '7'),
+
 		   ('4', 'B', '2', '2011', '5'),
 		   ('5', 'C', '2', '2011', '5'),
 		   ('6', 'A', '2', '2011', '5'),
+
 		   ('7', 'A', '2', '2013', '3'),
+
 		   ('8', 'C', '1', '2020', '1'),
 		   ('9', 'B', '1', '2020', '1'),
-		   ('10', 'A', '1', '2020', '1')
+		   ('10', 'A', '1', '2020', '1'),
+		   ('11', 'A', '1', '2020', '7'),
+		   ('12', 'B', '1', '2020', '7'),
+		   ('13', 'C', '1', '2020', '7')
+
 ;
 /*
 INSERT INTO Documentos(id, refAsignatura, semestre, anio, urlDocumento)
@@ -154,16 +164,38 @@ INSERT INTO ProfesorObservacion(id, refProfesor, refAlumno, comentario)
 
 INSERT INTO AyudanteObservacion(id, refProfesor, refAlumno, comentario)
 	VALUES ('', '', '', '');
-
+*/
 INSERT INTO Evaluacion (id, fecha, diasAntes, diasDespues, refInstAsignatura) 
-	VALUES ('', '', '', '', '');
+	VALUES ('1', '2010-03-13', '7', '5', '1'),
+		   ('2', '2010-03-13', '7', '5', '2'),
+		   ('3', '2010-03-13', '7', '5', '3'),
 
+
+		   ('4', '2011-03-13', '7', '5', '4'),
+		   ('5', '2011-03-13', '7', '5', '5'),
+		   ('6', '2011-03-13', '7', '5', '6'),
+
+		   ('7', '2020-04-10', '7', '5', '11'),
+		   ('8', '2020-04-10', '7', '5', '12'),
+		   ('9', '2020-04-10', '7', '5', '13')
+;
+
+/*
 INSERT INTO Reunion(id, fecha, diasAntes, comentario)
 	VALUES ('', '', '', '');
+*/
 
 INSERT INTO CalificarEvaluacion(id, refInstAsignatura, refEvaluacion, refAlumno, nota)
-	VALUES ('', '', '', '', '');
+	VALUES ('1', '1', '1', '201040001', '2.4'),
+		   ('2', '2', '2', '201040002', '6.6'),
+		   ('3', '3', '3', '201040003', '4.0'),
 
+		   ('4', '4', '4', '201140003', '4.0'),
+		   ('5', '5', '5', '201140004', '5.1'),
+		   ('6', '6', '6', '201140005', '4.8')
+;
+
+/*
 INSERT INTO RealizarReunion(id, refInstAsignatura, refReunion, refAlumno)
 	VALUES ('', '', '', '');
 
