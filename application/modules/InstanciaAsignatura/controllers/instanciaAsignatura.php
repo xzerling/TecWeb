@@ -84,4 +84,11 @@ class InstanciaAsignatura extends MY_Controller {
         
 		$this->load->view('instanciaAsignatura', $data);
 	}
+
+    function cargarAlumnos()
+    {
+    	$archivo = $this->input->post("form_data");
+    	echo("archivo: "+$archivo);
+    	$this->modelo->insertExcel($archivo);
+    }
 }

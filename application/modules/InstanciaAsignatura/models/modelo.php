@@ -157,5 +157,70 @@ class modelo extends CI_Model{
 
 		return $this->db->get("login", $numberPerPage, $this->uri->segment(3))->result();
 	}
+
+	public function insertExcel($archivo)
+	{
+		    
+		$allowedFileType = ['application/vnd.ms-excel','text/xls','text/xlsx','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+		  
+		  //if(in_array($_FILES["file"]["type"],$allowedFileType)){
+
+		        //$targetPath = 'subidas/'.$_FILES['file']['name'];
+		        $targetPath = $archivo;
+		        //move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
+		        //$reader = \vendor\IOFactory::createReaderForFile($archivo);
+
+		        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+	            $spreadsheet = $reader->load($archivo);
+     
+    			$sheetData = $spreadsheet->getActiveSheet()->toArray();
+   				print_r($sheetData);
+
+
+		        $Reader = new SpreadsheetReader($targetPath);
+		        
+
+		        $sheetCount = count($Reader->sheets());
+		        for($i=0;$i<$sheetCount;$i++)
+		        {
+		            
+		            $Reader->ChangeSheet($i);
+		            
+		            foreach ($Reader as $Row)
+		            {
+		          
+		                $matriculas = "";
+		                if(isset($Row[0])) {
+		                    $matriculas = mysqli_real_escape_string($con,$Row[0]);
+		                }
+		                
+		                $nombres = "";
+		                if(isset($Row[1])) {
+		                    $nombres = mysqli_real_escape_string($con,$Row[1]);
+		                }
+						
+		                $correo = "";
+		                if(isset($Row[2])) {
+		                    $correo = mysqli_real_escape_string($con,$Row[2]);
+		                }
+		                
+		                if (!empty($nombres) || !empty($matriculas) || !empty($correo)) {
+		                    $query = "insert into alumno(matricula, nombre, correo) values('".$matriculas."','".$nombres."','".$correo."')";
+		                    $resultados = mysqli_query($con, $query);
+		                
+		                    if (! empty($resultados)) {
+		                        $type = "success";
+		                        $message = "Excel importado correctamente";
+		                    } else {
+		                        $type = "error";
+		                        $message = "Hubo un problema al importar registros";
+		                    }
+		                }
+		             }
+		        
+		         }
+		 // }
+
+	}
 }
 ?>

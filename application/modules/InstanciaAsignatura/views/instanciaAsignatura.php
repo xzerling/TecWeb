@@ -78,6 +78,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div id="asignaturas">
 
+	<button class="btn btn-secondary" onclick="CargarExcel()">Cargar Alumnos</button>
+
 	<a href="<?=base_url()?>index.php/instanciaAsignatura/crear" class="btn btn-success">
           <span class="glyphicon glyphicon-plus"></span> Agregar Asignatura
         </a>
@@ -189,6 +191,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="modal-footer">
 				<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
 				<button class="btn btn-success" onclick="guardarCambios()">Guardar</button>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div id="myModal2" style="display: none;" class="modal" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+  				<h3 class="mt-5">Importar alumnos desde Excel a MySQL usando PHP</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+			</div>
+			<div class="modal-body">
+				
+
+
+	        <form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+	            <div>
+	                <label>Elija Archivo Excel</label> <input type="file" name="file"
+	                    id="file" accept=".xls,.xlsx">
+
+	            </div>
+	        
+	        </form>
+        
+
+
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                <button id="submit" name="import" class="btn btn-success" onclick="enviarExcel()">Importar Registros</button>
+	        
 			</div>
 		</div>
 	</div>
@@ -338,6 +375,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$("#listado").show('slow');
 			}
 		)
+	}
+
+
+	function CargarExcel(){
+		console.log("cargar Excel")
+
+		//$("#idEdit").val($("#id"+indice).val());
+
+		$("#myModal2").modal('show');
+	}
+
+	function enviarExcel() {
+		var base_url = "<? echo base_url()?>";
+		var file = $('#file').prop('files')[0];
+	    var form_data = new FormData();                  
+   		form_data.append('archivo', file);
+   		alert(form_data.get("archivo"));  
+
+	$.ajax(
+
+    {
+        url : base_url+"index.php/instanciaAsignatura/cargarAlumnos",
+        type: "POST",
+        contentType: false,
+        processData: false,
+        data: form_data,  
+        success:function(data, textStatus, jqXHR)
+        {
+        	console.log("funciona")
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            console.log("error al enviar el archivo")
+            console.log(textStatus)
+            console.log(errorThrown)
+
+        }
+    });
+
 	}
 
 
