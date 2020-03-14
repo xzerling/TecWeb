@@ -85,7 +85,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<button class="btn btn-warning" type="submit">BD Asignaturas</button>
 	</form>
 
-    <table class="table table-striped">
+	<div id="filtrar" class="col-lg-3">
+		<input type="text" class ="form-control" id="searchFilter">
+		<select id="atributoFilter" class="form-control">
+						<option value="1">Nombre</option>
+						<option value="2">Semestre</option>
+						<option value="3">Año</option>
+					</select>
+		<button class="btn btn-secondary" onclick="filtrar()">Filtrar</button>
+	</div>
+
+    <table id="tabla" name="tabla" class="table table-striped">
 	<th>Nombre</th>
 	<th>Seccion</th>
 	<th>Semestre</th>
@@ -93,7 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<th></th>
 	<th></th>
 	<?$i=0;foreach($asignaturas as $row):?>
-		<tr>
+		<tr class="trhideclass<?=$i?>">
 			<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
 				<input type="hidden" id="refAsignatura<?=$i?>" value="<?=$row['refAsignatura']?>" readonly>
 				<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
@@ -190,6 +200,80 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </html>
 
 <script type="text/javascript">
+	$("#searchFilter").change(function(){
+	  filtrar();
+	}); 
+
+	$('#searchFilter').on('input',function(e){
+		var tabla = $($('#tabla').children()[0]).children();
+		var largoTabla = tabla.length;
+	    mostrarTodos(largoTabla);
+	});
+
+	function filtrar(){
+		var searchFilter = $('#searchFilter').val();
+		var atributoFilter = $('#atributoFilter').val();
+		var tabla = $($('#tabla').children()[0]).children();
+		var largoTabla = tabla.length;
+
+		var localNombre;
+		var localSemestre;
+		var localAnio;
+
+		console.log(searchFilter, atributoFilter, largoTabla);
+		
+		for (var i = 0; i < largoTabla-1 ; i++) {
+			localRow = tabla[i];
+
+			localNombre = $("#nombre"+i).val();
+			localSemestre = $("#semestre"+i).val();;
+			localAnio = $("#anio"+i).val();
+
+			console.log(localNombre, localSemestre, localAnio, atributoFilter);
+
+			if(searchFilter != ""){
+				//ocultarTodos(largoTabla);
+				//nombre
+				if(atributoFilter == '1'){
+					if(localNombre != searchFilter){
+						console.log("mostrar");
+						$('.trhideclass'+(i)).hide();
+					}
+				}else if(atributoFilter == '2'){
+					//semestre
+					if(localSemestre != searchFilter){
+						console.log("mostrar");
+						console.log(i);
+						$('.trhideclass'+(i)).hide();
+					}
+				}else if(atributoFilter == '3'){
+					//año	
+					if(localAnio != searchFilter){
+						console.log("mostrar");
+						$('.trhideclass'+(i)).hide();
+					}
+				}
+			}else{
+				mostrarTodos(largoTabla);
+			}
+		}
+	}
+
+	function ocultarTodos(largoTabla){
+		var tabla = $($('#tabla').children()[0]).children();
+		
+		for (var i = 0; i < largoTabla-1 ; i++) {
+			$('.trhideclass'+(i)).hide();
+		}
+	}
+
+	function mostrarTodos(largoTabla){
+		var tabla = $($('#tabla').children()[0]).children();
+		
+		for (var i = 0; i < largoTabla-1 ; i++) {
+			$('.trhideclass'+(i)).show();
+		}
+	}
 
 	function editar(indice){
 		console.log("editar")
