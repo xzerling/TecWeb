@@ -49,7 +49,7 @@
                       <div class="content">
                          <h3>Notas</h3>
                           <p>Texto descriptivo </p>
-                               <a href="<?=base_url()?>index.php/cambio">Entrar</a>
+                               <a href="<?=base_url()?>index.php/nota">Entrar</a>
                       </div>
                   </div> 
      </div>
