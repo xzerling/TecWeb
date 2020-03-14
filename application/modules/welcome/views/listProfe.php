@@ -33,27 +33,9 @@
                                   <h2> Renzo Angles</h2> 
                                    <b><h3>Cursos</h3></b> 
                                   <p>Base de datos</p> 
-                                  <p>Base de datos abanzada</p> 
+                                  <p>Base de datos avanzada</p> 
                                    <br>
                                   </b><h3>rangles@utalca.cl</h3></b>
-                                  <button type="submit" class="btn btn-dark" style="background-color: #4d6174">Ver más</button>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-                <div class="item">
-                    <div class="flip-card mx-auto">
-                         <div class="flip-card-inner">
-                             <div class="flip-card-front">
-                                <img src="https://media.giphy.com/media/YZpUlyGLndm48/giphy.gif" alt="Avatar" style="width:300px;height:300px;">
-                            </div>
-                            <div class="flip-card-back">
-                                  <h2> Bugs Bunny </h2> 
-                                   <b><h3>Cursos</h3></b> 
-                                  <p>Como sacar de quizio</p> 
-                                  <p>Temporada de conejo</p> 
-                                   <br>
-                                  </b><h3>bbunny@utalca.cl</h3></b>
                                   <button type="submit" class="btn btn-dark" style="background-color: #4d6174">Ver más</button>
                             </div>
                         </div>
@@ -84,11 +66,13 @@
                                 <img src="https://media3.giphy.com/media/J1Xh064pPyRWcNYaj6/giphy.webp" alt="Avatar" style="width:300px;height:300px;">
                             </div>
                             <div class="flip-card-back">
-                                  <h1>Equipo 4</h1> 
-                                   <p>Participantes</p> 
-                                  <p>Felipe Milla</p> 
-                                  <p>Sebastian Ibarra</p> 
-                                <p>Brayan Escobar</p> 
+                                  <h1>Equipo</h1> 
+                                  <p>Participantes</p> 
+                                  <p>Juan Cordero</p> 
+                                  <p>Alvaro Elgueda</p> 
+                                  <p>Cristobal Henriquez</p> 
+                                  <p>Euguenio Peredo</p> 
+                                  <p>Nicolas Pradenas</p> 
                             </div>
                         </div>
                     </div> 
@@ -100,11 +84,13 @@
                                 <img src="https://media3.giphy.com/media/J1Xh064pPyRWcNYaj6/giphy.webp" alt="Avatar" style="width:300px;height:300px;">
                             </div>
                             <div class="flip-card-back">
-                                  <h1>Equipo 4</h1> 
-                                   <p>Participantes</p> 
-                                  <p>Felipe Milla</p> 
-                                  <p>Sebastian Ibarra</p> 
-                                <p>Brayan Escobar</p> 
+                                  <h1>Equipo</h1> 
+                                  <p>Participantes</p> 
+                                  <p>Juan Cordero</p> 
+                                  <p>Alvaro Elgueda</p> 
+                                  <p>Cristobal Henriquez</p> 
+                                  <p>Euguenio Peredo</p> 
+                                  <p>Nicolas Pradenas</p>  
                             </div>
                         </div>
                     </div> 
@@ -116,11 +102,13 @@
                                 <img src="https://media3.giphy.com/media/J1Xh064pPyRWcNYaj6/giphy.webp" alt="Avatar" style="width:300px;height:300px;">
                             </div>
                             <div class="flip-card-back">
-                                  <h1>Equipo 4</h1> 
-                                   <p>Participantes</p> 
-                                  <p>Felipe Milla</p> 
-                                  <p>Sebastian Ibarra</p> 
-                                <p>Brayan Escobar</p> 
+                                  <h1>Equipo</h1> 
+                                  <p>Participantes</p> 
+                                  <p>Juan Cordero</p> 
+                                  <p>Alvaro Elgueda</p> 
+                                  <p>Cristobal Henriquez</p> 
+                                  <p>Euguenio Peredo</p> 
+                                  <p>Nicolas Pradenas</p>  
                             </div>
                         </div>
                     </div> 
@@ -132,11 +120,13 @@
                                 <img src="https://media3.giphy.com/media/J1Xh064pPyRWcNYaj6/giphy.webp" alt="Avatar" style="width:300px;height:300px;">
                             </div>
                             <div class="flip-card-back">
-                                  <h1>Equipo 4</h1> 
-                                   <p>Participantes</p> 
-                                  <p>Felipe Milla</p> 
-                                  <p>Sebastian Ibarra</p> 
-                                <p>Brayan Escobar</p> 
+                                  <h1>Equipo</h1> 
+                                  <p>Participantes</p> 
+                                  <p>Juan Cordero</p> 
+                                  <p>Alvaro Elgueda</p> 
+                                  <p>Cristobal Henriquez</p> 
+                                  <p>Euguenio Peredo</p> 
+                                  <p>Nicolas Pradenas</p>  
                             </div>
                         </div>
                     </div> 
@@ -148,11 +138,13 @@
                                 <img src="https://media3.giphy.com/media/J1Xh064pPyRWcNYaj6/giphy.webp" alt="Avatar" style="width:300px;height:300px;">
                             </div>
                             <div class="flip-card-back">
-                                  <h1>Equipo 4</h1> 
-                                   <p>Participantes</p> 
-                                  <p>Felipe Milla</p> 
-                                  <p>Sebastian Ibarra</p> 
-                                <p>Brayan Escobar</p> 
+                                  <h1>Equipo</h1> 
+                                  <p>Participantes</p> 
+                                  <p>Juan Cordero</p> 
+                                  <p>Alvaro Elgueda</p> 
+                                  <p>Cristobal Henriquez</p> 
+                                  <p>Euguenio Peredo</p> 
+                                  <p>Nicolas Pradenas</p>  
                             </div>
                         </div>
                     </div> 
@@ -164,11 +156,13 @@
                                 <img src="https://media3.giphy.com/media/J1Xh064pPyRWcNYaj6/giphy.webp" alt="Avatar" style="width:300px;height:300px;">
                             </div>
                             <div class="flip-card-back">
-                                  <h1>Equipo 4</h1> 
-                                   <p>Participantes</p> 
-                                  <p>Felipe Milla</p> 
-                                  <p>Sebastian Ibarra</p> 
-                                <p>Brayan Escobar</p> 
+                                  <h1>Equipo</h1> 
+                                  <p>Participantes</p> 
+                                  <p>Juan Cordero</p> 
+                                  <p>Alvaro Elgueda</p> 
+                                  <p>Cristobal Henriquez</p> 
+                                  <p>Euguenio Peredo</p> 
+                                  <p>Nicolas Pradenas</p>  
                             </div>
                         </div>
                     </div> 
