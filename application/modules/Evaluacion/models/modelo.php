@@ -6,7 +6,7 @@ class modelo extends CI_Model{
 		$this->load->database();
 	}
 
-	public function listarNotas(){
+	public function listarEvaluaciones(){
 		$query = "select evaluacion.id,evaluacion.fecha, evaluacion.diasAntes, evaluacion.diasDespues, asignatura.nombre, instanciaasignatura.seccion, evaluacion.refInstAsignatura from evaluacion, instanciaasignatura, asignatura where evaluacion.refInstAsignatura = instanciaasignatura.id and instanciaasignatura.refAsignatura = asignatura.id";
 
 		$resultado = $this->db->query($query)->result();
