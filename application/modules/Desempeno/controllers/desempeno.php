@@ -18,8 +18,20 @@ class Desempeno extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
+	function __construct()
+    {
+        parent::__construct();
+ 		$this->load->model("modelo");
+        $this->load->database();
+ 
+    }
 	public function index()
 	{
-		$this->load->view('desempeno');
+		$output = $this->modelo->cargarDatos();
+
+		$data['calificaciones'] = $output;
+
+		$this->load->view('desempeno', $data);
 	}
 }
