@@ -55,16 +55,12 @@ CREATE TABLE Documentos(
 
 CREATE TABLE ProfesorAsignatura(
 	refProfesor varchar(32) NOT NULL REFERENCES Profesor(correo),
-	refAsignatura int NOT NULL REFERENCES Asignatura(id),
-	semestre int NOT NULL,
-	anio int NOT NULL
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
 );
 
 CREATE TABLE AyudanteAsignatura(
 	refAyudante varchar(32) NOT NULL REFERENCES Ayudante(correo),
-	refAsignatura int NOT NULL REFERENCES Asignatura(id),
-	semestre int NOT NULL,
-	anio int NOT NULL
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
 );
 
 CREATE TABLE Alumno(
