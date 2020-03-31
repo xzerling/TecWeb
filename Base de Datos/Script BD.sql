@@ -55,16 +55,12 @@ CREATE TABLE Documentos(
 
 CREATE TABLE ProfesorAsignatura(
 	refProfesor varchar(32) NOT NULL REFERENCES Profesor(correo),
-	refAsignatura int NOT NULL REFERENCES Asignatura(id),
-	semestre int NOT NULL,
-	anio int NOT NULL
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
 );
 
 CREATE TABLE AyudanteAsignatura(
 	refAyudante varchar(32) NOT NULL REFERENCES Ayudante(correo),
-	refAsignatura int NOT NULL REFERENCES Asignatura(id),
-	semestre int NOT NULL,
-	anio int NOT NULL
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
 );
 
 CREATE TABLE Alumno(
@@ -104,7 +100,6 @@ CREATE TABLE Reunion(
 
 CREATE TABLE CalificarEvaluacion(
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id),
 	refEvaluacion int NOT NULL REFERENCES Evaluacion(id),
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula),
 	nota double(2,1) NOT NULL

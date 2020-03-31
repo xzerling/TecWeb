@@ -91,4 +91,35 @@ class InstanciaAsignatura extends MY_Controller {
     	echo("archivo: "+$archivo);
     	$this->modelo->insertExcel($archivo);
     }
+
+    function asignarProfesor()
+    {
+    	$asignaturas = $this->modelo->asignaturasNoAsignadas();
+    	$profesores = $this->modelo->obtenerProfesores();
+
+    	$data['asignaturas'] = $asignaturas;
+    	$data['profesores'] = $profesores;
+
+    	$this->load->view('asignarProfesor', $data);
+    }
+
+    function guardarProfesorAsignatura()
+    {
+    	$this->modelo->guardarProfesorAsignatura();
+    	redirect(base_url('index.php/instanciaAsignatura/asignaturasAsignadas'));
+    }
+
+    function asignaturasAsignadas()
+    {
+    	$asignaturas = $this->modelo->asignaturasAsignadas();
+    	$data['asignaturas'] = $asignaturas;
+
+    	$this->load->view('asignaturasAsignadas',$data);
+    }
+
+    function eliminarAsignacion()
+    {
+    	$refInstAsignatura = $this->input->post('refInstAsignatura');
+    	$this->modelo->eliminarAsignacion($refInstAsignatura);
+    }
 }

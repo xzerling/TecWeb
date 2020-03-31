@@ -91,7 +91,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
 	!-->
-		<a href="<?php echo base_url('index.php/evaluacion/crear/')?>">Agregar Evaluacion</a>
+		<div class="container">
+			<a href="<?php echo base_url('index.php/evaluacion/crear/')?>"><button class="btn btn-warning"> Crear Evaluacion </button></a>
+			<a href="<?= base_url('index.php/evaluacion/monitoreo')?>"><button class="btn btn-success">Monitorear</button></a>
+		</div>
+		
 
 		<table class="table table-striped" align="center">
 			<thead>
@@ -131,6 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php $i++; endforeach;?>
 			</tbody>
 		</table>
+	
 	
 	
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
