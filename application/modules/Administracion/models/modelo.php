@@ -25,4 +25,10 @@ class modelo extends CI_Model
 
 		$this->db->insert('profesor',$data);
 	}
+
+	public function eliminarProfesor($correo)
+	{
+		$this->db->where("correo", $correo);
+		$this->db->delete('profesor');
+	}
 }

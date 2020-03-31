@@ -265,5 +265,11 @@ class modelo extends CI_Model{
 		
 		return $asignaturas;
 	}
+
+	public function eliminarAsignacion($refInstAsignatura)
+	{
+		$this->db->where("refInstAsignatura",$refInstAsignatura);
+		$this->db->delete('profesorasignatura');
+	}
 }
 ?>

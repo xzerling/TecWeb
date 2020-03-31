@@ -27,4 +27,10 @@ class Administracion extends MY_Controller
 		$this->modelo->guardar();
 		redirect(base_url('index.php/administracion'));
 	}
+
+	public function eliminarProfesor()
+	{
+		$correo = $this->input->post('correo');
+		$this->modelo->eliminarProfesor($correo);
+	}
 }

@@ -59,4 +59,13 @@ class Evaluacion extends MY_Controller {
 
 	}
 
+	public function monitoreo()
+	{
+		$data['evaluadas'] = $this->modelo->obtenerEvaluadas();
+		$data['pendientes'] = $this->modelo->obtenerPendientes();
+		$data['atrasadas'] = $this->modelo->obtenerAtrasadas();
+
+		$this->load->view('monitoreo',$data);
+	}
+
 }
