@@ -1,3 +1,10 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Welcome to CodeIgniter</title>
 
 	<style type="text/css">
 
@@ -76,31 +83,6 @@
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-
-	<form method="post" action="<?=base_url()?>index.php/cambio">
-		<button type="submit">Cambio</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/instanciaAsignatura">
-		<button type="submit">Asignaturas</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/desempeno">
-		<button type="submit">Desempeño</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/evaluacion">
-		<button type="submit">Evaluacion</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/reunion">
-		<button type="submit">Reunion</button>
-	</form>
-	<form method="post" action="<?=base_url()?>index.php/notificacion">
-		<button type="submit">Notificacion</button>
-	</form>
-	<form method="post" action="<?= base_url()?>index.php/observacion">
-		<button type="submit">Observacion</button>
-	</form>
-	<form method="post" action="<?= base_url()?>index.php/administracion">
-		<button type="submit">Administracion</button>
-	</form>
 </div>
 
 </body>

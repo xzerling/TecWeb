@@ -222,5 +222,48 @@ class modelo extends CI_Model{
 		 // }
 
 	}
+
+	public function asignaturasNoAsignadas()
+	{
+		$query = " 	select asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.id
+				   	from asignatura, instanciaasignatura 
+					where instanciaasignatura.refAsignatura = asignatura.id 
+					and instanciaasignatura.anio = YEAR(CURRENT_DATE) 
+					and instanciaasignatura.id NOT IN (select refInstAsignatura FROM profesorasignatura)";
+
+		$asignaturas = $this->db->query($query)->result();
+		return $asignaturas;
+	}
+
+	public function obtenerProfesores()
+	{
+		$query = "select profesor.correo, profesor.nombre from profesor";
+
+		$profesores = $this->db->query($query)->result();
+		return $profesores;
+	}
+
+	public function guardarProfesorAsignatura()
+	{
+		$data = array(
+			'refProfesor' => $this->input->post('refProfesor'),
+			'refInstAsignatura' => $this->input->post('refInstAsignatura')
+		);
+
+		$this->db->insert('profesorasignatura',$data);
+	}
+
+	public function asignaturasAsignadas()
+	{
+		$query = "select profesorasignatura.refProfesor, profesorasignatura.refInstAsignatura, profesor.nombre, asignatura.nombre as nombreasignatura,instanciaasignatura.seccion 
+					FROM asignatura, profesor, profesorasignatura, instanciaasignatura 
+					WHERE profesorasignatura.refProfesor = profesor.correo 
+					AND profesorasignatura.refInstAsignatura = instanciaasignatura.id 
+					AND instanciaasignatura.refAsignatura = asignatura.id";
+
+		$asignaturas = $this->db->query($query)->result();
+		
+		return $asignaturas;
+	}
 }
 ?>
