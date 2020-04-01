@@ -116,4 +116,10 @@ class InstanciaAsignatura extends MY_Controller {
 
     	$this->load->view('asignaturasAsignadas',$data);
     }
+
+    function eliminarAsignacion()
+    {
+    	$refInstAsignatura = $this->input->post('refInstAsignatura');
+    	$this->modelo->eliminarAsignacion($refInstAsignatura);
+    }
 }

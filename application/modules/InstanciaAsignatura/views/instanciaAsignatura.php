@@ -104,6 +104,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<th>Anio</th>
 	<th></th>
 	<th></th>
+	<th></th>
 	<?$i=0;foreach($asignaturas as $row):?>
 		<tr class="trhideclass<?=$i?>">
 			<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
@@ -123,7 +124,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
 				<p><?=$row['anio']?></p>
 			</td>
-			
 			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 			<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
 		</tr>

@@ -100,7 +100,6 @@ CREATE TABLE Reunion(
 
 CREATE TABLE CalificarEvaluacion(
 	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id),
 	refEvaluacion int NOT NULL REFERENCES Evaluacion(id),
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula),
 	nota double(2,1) NOT NULL

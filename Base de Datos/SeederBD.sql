@@ -185,14 +185,14 @@ INSERT INTO Reunion(id, fecha, diasAntes, comentario)
 	VALUES ('', '', '', '');
 */
 
-INSERT INTO CalificarEvaluacion(id, refInstAsignatura, refEvaluacion, refAlumno, nota)
-	VALUES ('1', '1', '1', '201040001', '2.4'),
-		   ('2', '2', '2', '201040002', '6.6'),
-		   ('3', '3', '3', '201040003', '4.0'),
+INSERT INTO CalificarEvaluacion(id, refEvaluacion, refAlumno, nota)
+	VALUES ('1', '1', '201040001', '2.4'),
+		   ('2', '2', '201040002', '6.6'),
+		   ('3', '3', '201040003', '4.0'),
 
-		   ('4', '4', '4', '201140003', '4.0'),
-		   ('5', '5', '5', '201140004', '5.1'),
-		   ('6', '6', '6', '201140005', '4.8')
+		   ('4', '4', '201140003', '4.0'),
+		   ('5', '5', '201140004', '5.1'),
+		   ('6', '6', '201140005', '4.8')
 ;
 
 /*
