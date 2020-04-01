@@ -52,7 +52,7 @@ class modelo extends CI_Model{
 
 	public function obtenerEvaluadas()
 	{
-		$query= " Select DISTINCT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.anio, evaluacion.fecha 
+		$query= " Select DISTINCT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, evaluacion.fecha 
 				FROM asignatura, evaluacion, instanciaasignatura, calificarevaluacion 
 				WHERE evaluacion.refInstAsignatura = instanciaasignatura.id 
 				AND instanciaasignatura.refAsignatura = asignatura.id 
@@ -64,7 +64,7 @@ class modelo extends CI_Model{
 
 	public function obtenerPendientes()
 	{
-		$query=" Select DISTINCT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.anio, evaluacion.fecha 
+		$query=" Select DISTINCT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre , instanciaasignatura.anio, evaluacion.fecha 
 				FROM asignatura, evaluacion, instanciaasignatura, calificarevaluacion 
 				WHERE evaluacion.refInstAsignatura = instanciaasignatura.id 
 				AND instanciaasignatura.refAsignatura = asignatura.id 
@@ -77,7 +77,7 @@ class modelo extends CI_Model{
 
 	public function obtenerAtrasadas()
 	{
-		$query = " Select DISTINCT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.anio, evaluacion.fecha 
+		$query = " Select DISTINCT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre ,instanciaasignatura.anio, evaluacion.fecha 
 				FROM asignatura, evaluacion, instanciaasignatura, calificarevaluacion 
 				WHERE evaluacion.refInstAsignatura = instanciaasignatura.id 
 				AND instanciaasignatura.refAsignatura = asignatura.id 

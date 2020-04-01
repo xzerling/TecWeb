@@ -115,6 +115,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<tr>
 					<th>Asignatura</th>
 					<th>Seccion</th>
+					<th>Semestre</th>
 					<th>Año</th>
 					<th>Fecha</th>
 				</tr>
@@ -125,6 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 						<td> <? echo $row->nombre; ?> </td>
 						<td> <? echo $row->seccion; ?> </td>
+						<td> <? echo $row->semestre; ?></td>
 						<td> <? echo $row->anio; ?></td>
 						<td> <? echo $row->fecha ?> </td>
 				</tr>
@@ -133,6 +135,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tr bgcolor="fff667">
 						<td> <? echo $row->nombre; ?> </td>
 						<td> <? echo $row->seccion; ?> </td>
+						<td> <? echo $row->semestre; ?></td>
 						<td> <? echo $row->anio; ?></td>
 						<td> <? echo $row->fecha; ?> </td>
 					</tr>
@@ -141,6 +144,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tr bgcolor="ff7676">
 						<td> <? echo $row->nombre; ?> </td>
 						<td> <? echo $row->seccion; ?> </td>
+						<td> <? echo $row->semestre; ?></td>
 						<td> <? echo $row->anio; ?></td>
 						<td> <? echo $row->fecha; ?> </td>
 					</tr>
