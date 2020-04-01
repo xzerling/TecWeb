@@ -15,14 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<style type="text/css">
 
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
 	a {
 		color: #003399;
 		background-color: transparent;
@@ -89,8 +81,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li>
-          <a href="href=<?= base_url()?>index.php">Inicio <span class="sr-only">(current)</span></a>
+	  	<li class="nav-item ">
+          <a class="nav-link" href="<?= base_url()?>index.php/">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li>
           <a class="nav-link" href="<?= base_url()?>index.php/dashboard">Dashboard</a>

@@ -14,15 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script type="text/javascript" src="<?= base_url()?>/js/inicio.js"></script>
 
 	<style type="text/css">
-
-
-			body {
-				background-color: #fff;
-				margin: 40px;
-				font: 13px/20px normal Helvetica, Arial, sans-serif;
-				color: #4F5155;
-			}
-
 			a {
 				color: #003399;
 				background-color: transparent;
@@ -83,14 +74,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Profesor</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="nav-item ">
-          <a href="href=<?= base_url()?>index.php">Inicio <span class="sr-only">(current)</span></a>
+	  	<li class="nav-item ">
+          <a class="nav-link" href="<?= base_url()?>index.php/">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item ">
           <a class="nav-link" href="<?= base_url()?>index.php/dashboard">Dashboard</a>

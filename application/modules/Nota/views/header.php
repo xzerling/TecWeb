@@ -12,63 +12,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>/css/hoja1.css">
 	<script type="text/javascript" src="<?= base_url()?>/js/inicio.js"></script>
-
 	<style type="text/css">
 
+	h1 {
+		color: #444;
+		background-color: transparent;
+		border-bottom: 1px solid #D0D0D0;
+		font-size: 19px;
+		font-weight: normal;
+		margin: 0 0 14px 0;
+		padding: 14px 15px 10px 15px;
+	}
 
-			body {
-				background-color: #fff;
-				margin: 40px;
-				font: 13px/20px normal Helvetica, Arial, sans-serif;
-				color: #4F5155;
-			}
+	code {
+		font-family: Consolas, Monaco, Courier New, Courier, monospace;
+		font-size: 12px;
+		background-color: #f9f9f9;
+		border: 1px solid #D0D0D0;
+		color: #002166;
+		display: block;
+		margin: 14px 0 14px 0;
+		padding: 12px 10px 12px 10px;
+	}
 
-			a {
-				color: #003399;
-				background-color: transparent;
-				font-weight: normal;
-			}
+	#body {
+		margin: 0 15px 0 15px;
+	}
 
-			h1 {
-				color: #444;
-				background-color: transparent;
-				border-bottom: 1px solid #D0D0D0;
-				font-size: 19px;
-				font-weight: normal;
-				margin: 0 0 14px 0;
-				padding: 14px 15px 10px 15px;
-			}
+	p.footer {
+		text-align: right;
+		font-size: 11px;
+		border-top: 1px solid #D0D0D0;
+		line-height: 32px;
+		padding: 0 10px 0 10px;
+		margin: 20px 0 0 0;
+	}
 
-			code {
-				font-family: Consolas, Monaco, Courier New, Courier, monospace;
-				font-size: 12px;
-				background-color: #f9f9f9;
-				border: 1px solid #D0D0D0;
-				color: #002166;
-				display: block;
-				margin: 14px 0 14px 0;
-				padding: 12px 10px 12px 10px;
-			}
-
-			#body {
-				margin: 0 15px 0 15px;
-			}
-
-			p.footer {
-				text-align: right;
-				font-size: 11px;
-				border-top: 1px solid #D0D0D0;
-				line-height: 32px;
-				padding: 0 10px 0 10px;
-				margin: 20px 0 0 0;
-			}
-
-			#container {
-				margin: 10px;
-				border: 1px solid #D0D0D0;
-				box-shadow: 0 0 8px #D0D0D0;
-			}
+	#container {
+		margin: 10px;
+		border: 1px solid #D0D0D0;
+		box-shadow: 0 0 8px #D0D0D0;
+	}
 	</style>
+
+
 
 </head>
 <body>
@@ -83,22 +70,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">Profesor</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="nav-item ">
-          <a href="href=<?= base_url()?>index.php">Inicio <span class="sr-only">(current)</span></a>
+	 	 <li class="nav-item ">
+          <a class="nav-link" href="<?= base_url()?>index.php/">Inicio <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item">
           <a class="nav-link" href="<?= base_url()?>index.php/dashboard">Dashboard</a>
 				</li>
-				<li class="nav-item ">
+				<li class="nav-item">
            <a class="nav-link" href="<?=base_url()?>index.php/instanciaAsignatura">Asignatura</a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item">
         	<a class="nav-link" href="<?=base_url()?>index.php/evaluacion">Evaluacion</a>
         </li>
     		<li class="nav-item active">
@@ -127,4 +114,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-

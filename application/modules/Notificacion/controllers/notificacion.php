@@ -20,6 +20,7 @@ class Notificacion extends MY_Controller {
 	 */
 	public function index()
 	{
+		$this->load->view('header');
 		$this->load->view('notificacion');
 	}
 }
