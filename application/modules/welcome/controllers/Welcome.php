@@ -18,7 +18,10 @@ class Welcome extends MY_Controller {
 				$this->Dashboard->index($data);
 			}
 			if ($this->session->userdata('perfil')== 2) {// Profesor 
-				$this->Dashboard->index($data);
+				//$this->Dashboard->index($data);
+				$this->load->view("header2");
+				$this->load->view("dashboard");
+				$this->load->view("fother");
 			}
 			if ($this->session->userdata('perfil')== 3) {// Ayudante 
 				$this->Dashboard->index($data);
@@ -43,6 +46,11 @@ class Welcome extends MY_Controller {
 
 		$this->session->set_userdata($data);
 		$this->index();
+	}
+
+	function salir(){
+		$this->session->sess_destroy();
+		redirect(base_url());
 	}
 
 }
