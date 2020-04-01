@@ -200,3 +200,15 @@ INSERT INTO RealizarReunion(id, refInstAsignatura, refReunion, refAlumno)
 	VALUES ('', '', '', '');
 
 */
+
+INSERT INTO alumnoasignatura(refAlumno, refInstAsignatura)
+	VALUES('201040001', '8'),
+		  ('201340010', '9'),
+		  ('201340009', '10'),
+		  ('201340008', '8'),
+		  ('201340007', '9'),
+		  ('201040002', '10'),
+		  ('201040003', '11'),
+		  ('201040004', '12'),
+		  ('201040005', '13'),
+	 	  ('201140001', '8');

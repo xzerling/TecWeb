@@ -73,6 +73,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		display: block;
 	}
 
+	.box-green{
+	background-color:#72ff67; 
+	width:30px;
+	height:30px;
+	}
+
+	.box-yellow{
+	background-color:#fff667; 
+	width:30px;
+	height:30px;
+	}
+
+	.box-red{
+	background-color:#ff7676; 
+	width:30px;
+	height:30px;
+	}	
+
 	</style>
 
 	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -81,7 +99,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>Monitoreo de evaluaciones</h1>
+	<h1>Monitoreo de ingreso de notas</h1>
+
+	<div class="container">
+		<div class="row">
+			<div class="box-green"></div> <p> Calificadas </p>
+			<div class="box-yellow"></div> <p> Pendientes de Calificar </p>
+			<div class="box-red"></div> <p> Atrasadas sin Calificar </p>
+		</div>
+	</div>
 
 	<div class="container">
 		<table class="table">
@@ -89,6 +115,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<tr>
 					<th>Asignatura</th>
 					<th>Seccion</th>
+					<th>Semestre</th>
+					<th>Año</th>
 					<th>Fecha</th>
 				</tr>
 			</thead>
@@ -98,6 +126,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					
 						<td> <? echo $row->nombre; ?> </td>
 						<td> <? echo $row->seccion; ?> </td>
+						<td> <? echo $row->semestre; ?></td>
+						<td> <? echo $row->anio; ?></td>
 						<td> <? echo $row->fecha ?> </td>
 				</tr>
 				<? endforeach;?>
@@ -105,6 +135,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tr bgcolor="fff667">
 						<td> <? echo $row->nombre; ?> </td>
 						<td> <? echo $row->seccion; ?> </td>
+						<td> <? echo $row->semestre; ?></td>
+						<td> <? echo $row->anio; ?></td>
 						<td> <? echo $row->fecha; ?> </td>
 					</tr>
 				<? endforeach;?>
@@ -112,6 +144,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tr bgcolor="ff7676">
 						<td> <? echo $row->nombre; ?> </td>
 						<td> <? echo $row->seccion; ?> </td>
+						<td> <? echo $row->semestre; ?></td>
+						<td> <? echo $row->anio; ?></td>
 						<td> <? echo $row->fecha; ?> </td>
 					</tr>
 				<? endforeach;?>

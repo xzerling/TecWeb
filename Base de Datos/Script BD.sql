@@ -111,3 +111,8 @@ CREATE TABLE RealizarReunion(
 	refReunion int NOT NULL REFERENCES Reunion(id),
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula)
 );
+
+CREATE TABLE AlumnoAsignatura(
+	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula),
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
+);
