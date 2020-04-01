@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>/css/hoja1.css">
 	<script type="text/javascript" src="<?= base_url()?>/js/inicio.js"></script>
-
 	<style type="text/css">
 
 
@@ -69,7 +68,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		box-shadow: 0 0 8px #D0D0D0;
 	}
 	</style>
-
 </head>
 <body>
 
@@ -89,13 +87,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li>
+        <li class="nav-item ">
           <a href="href=<?= base_url()?>index.php">Inicio <span class="sr-only">(current)</span></a>
         </li>
-        <li>
+        <li class="nav-item">
           <a class="nav-link" href="<?= base_url()?>index.php/dashboard">Dashboard</a>
-				</li class="active">
-				<li class="nav-item " id="Asignatura">
+				</li>
+				<li class="nav-item active">
            <a class="nav-link" href="<?=base_url()?>index.php/instanciaAsignatura">Asignatura</a>
         </li>
         <li class="nav-item ">
@@ -122,10 +120,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Buscar</button>
-			</form>
-			
-		
+      </form>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
 

@@ -26,7 +26,7 @@ class Nota extends MY_Controller {
 	public function index()
 	{
 		$resultados['resultados'] = $this->modelo->listarNotas();
-
+		$this->load->view('header');
 		$this->load->view('nota', $resultados);
 	}
 
@@ -34,7 +34,7 @@ class Nota extends MY_Controller {
 	{
 		$data['asignaturas'] = $this->modelo->cargarDatos();
 		$data2['alumnos'] = $this->modelo->cargarAlumnos();
-
+		$this->load->view('header');
 		$this->load->view('crear', $data);
 	}
 

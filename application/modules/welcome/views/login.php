@@ -12,7 +12,8 @@
 					<div class="form-group">
 						<input class = "form-control" type="password" name="clave" placeholder="Contraseña" required>	
 					</div>	
-					<button type="submit" class="btn btn-dark btn-block">Entrar</button>	
+					<!--button type="submit" class="btn btn-dark btn-block">Entrar</button-->
+					<a href="<?=base_url()?>index.php/dashboard">Entrar</a>	
 					<b>
 					<!--a href="<?= base_url()?>Welcome/registrarse" style="color:#34495E">Aun no esta registrado, hacer click aqui</a-->
 					</b>	

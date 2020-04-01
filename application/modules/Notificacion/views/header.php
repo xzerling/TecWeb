@@ -23,8 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Plataforma de gestion</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Bienvenido</a>
+      <a class="navbar-brand" href="#">Brand</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

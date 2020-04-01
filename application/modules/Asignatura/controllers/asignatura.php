@@ -31,7 +31,7 @@ class Asignatura extends MY_Controller {
 		$output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-        
+        $this->Header->view('header');
 		$this->load->view('asignatura', $data);
 	}
 
@@ -56,11 +56,10 @@ class Asignatura extends MY_Controller {
         $crud->columns('id','nombre','estado');
         $output = $crud->render();*/
 
-        
         $output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-        
+        $this->load->view('header');
 		$this->load->view('asignatura', $data);
 	}
 }

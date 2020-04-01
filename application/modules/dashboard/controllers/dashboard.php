@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Desempeno extends MY_Controller {
+class Dashboard extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,20 +18,10 @@ class Desempeno extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	
-	function __construct()
-    {
-        parent::__construct();
- 		$this->load->model("modelo");
-        $this->load->database();
- 
-    }
 	public function index()
 	{
-		$output = $this->modelo->cargarDatos();
-
-		$data['calificaciones'] = $output;
 		$this->load->view('header');
-		$this->load->view('desempeno', $data);
+		$this->load->view('dashboard');
+		$this->load->view('fother');
 	}
 }

@@ -41,7 +41,7 @@ class InstanciaAsignatura extends MY_Controller {
     function crear()
 	{
 		$data['asignaturas'] = $this->modelo->obtenerAsignaturas();
-
+		$this->load->view('header');
 		$this->load->view('crear', $data);
 	}
 
@@ -50,7 +50,7 @@ class InstanciaAsignatura extends MY_Controller {
 		$output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-        
+        $this->load->view('header');
 		$this->load->view('instanciaAsignatura', $data);
 	}
 
@@ -81,7 +81,7 @@ class InstanciaAsignatura extends MY_Controller {
         $output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-        
+        $this->load->view('header');
 		$this->load->view('instanciaAsignatura', $data);
 	}
 
@@ -100,6 +100,7 @@ class InstanciaAsignatura extends MY_Controller {
     	$data['asignaturas'] = $asignaturas;
     	$data['profesores'] = $profesores;
 
+		$this->load->view('header');
     	$this->load->view('asignarProfesor', $data);
     }
 
@@ -112,8 +113,8 @@ class InstanciaAsignatura extends MY_Controller {
     function asignaturasAsignadas()
     {
     	$asignaturas = $this->modelo->asignaturasAsignadas();
-    	$data['asignaturas'] = $asignaturas;
-
+		$data['asignaturas'] = $asignaturas;
+		$this->load->view('header');
     	$this->load->view('asignaturasAsignadas',$data);
     }
 
@@ -123,3 +124,5 @@ class InstanciaAsignatura extends MY_Controller {
     	$this->modelo->eliminarAsignacion($refInstAsignatura);
     }
 }
+
+
