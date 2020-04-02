@@ -19,6 +19,9 @@ INSERT INTO Administrador (correo, nombre, clave)
 	VALUES ('admin_007@hotmail.com', 'admin_007', '123123123')
 ;
 
+INSERT INTO DirectorEscuela(correo, nombre, clave)
+	VALUES('director@hotmail.com', 'Director Escuela', '123123123');
+
 
 INSERT INTO Profesor (correo, nombre, clave)
 	VALUES ('jmartinez@hotmail.com', 'Juan Martinez P.', '123123123'),
@@ -200,6 +203,18 @@ INSERT INTO RealizarReunion(id, refInstAsignatura, refReunion, refAlumno)
 	VALUES ('', '', '', '');
 
 */
+
+INSERT INTO profesorasignatura(refProfesor, refInstAsignatura)
+		VALUES('jreyes@hotmail.com', '1'),
+		('kjara@hotmail.com','2'),
+		('lbasoalto@hotmail.com','3'),
+		('marenas@hotmail.com', '4'),
+		('mbravo@hotmail.com', '5'),
+		('rhenzi@hotmail.com' , '6'),
+		('rhenzi@hotmail.com', '11'),
+		('rhenzi@hotmail.com', '12'),
+		('rhenzi@hotmail.com', '13');
+
 
 INSERT INTO alumnoasignatura(refAlumno, refInstAsignatura)
 	VALUES('201040001', '8'),
