@@ -158,6 +158,18 @@ class modelo extends CI_Model{
 		return $this->db->get("login", $numberPerPage, $this->uri->segment(3))->result();
 	}
 
+	public function cargarArchivoBD($idA, $semestre, $anio, $ruta)
+	{
+
+		$data["refAsignatura"] = $idA;
+		$data["semestre"] = $semestre;
+		$data["anio"] = $anio;
+		$data["urlDocumento"] = $ruta;
+		$this->db->insert("documentos", $data);
+
+
+	}
+
 	public function insertExcel($archivo)
 	{
 		    

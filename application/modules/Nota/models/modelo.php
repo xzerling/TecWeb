@@ -13,6 +13,8 @@ class modelo extends CI_Model{
 				  AND evaluacion.id = calificarevaluacion.refEvaluacion 
 				  AND alumno.matricula = calificarevaluacion.refAlumno";
 
+	
+
 		$resultado = $this->db->query($query)->result();
 		return $resultado;
 	}

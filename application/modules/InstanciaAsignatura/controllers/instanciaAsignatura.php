@@ -91,4 +91,93 @@ class InstanciaAsignatura extends MY_Controller {
     	echo("archivo: "+$archivo);
     	$this->modelo->insertExcel($archivo);
     }
+
+    function cargarArchivo()
+    {
+    	$id_asignatura_instancia = $this->input->post("idA");
+    	$nombreCurso = $this->input->post("nombreCurso");
+    	$anio = $this->input->post("anio");
+    	$semestre = $this->input->post("semestre");
+    	$nombreArchivo = $this->input->post("nombreArchivo");
+    	//$idd = 'idA';
+    	$mi_archivo = 'archivoCurso';
+    	//$mi_archivo = $this->input->post('file');
+
+    	$ruta = 'files/'.$nombreCurso.'/';
+    	$ruta2 = $ruta.$anio.'/';
+    	$ruta3 = $ruta2.$semestre.'/';
+    	$rutaFinal = $ruta3.$nombreArchivo;
+		$archivo = $ruta.$mi_archivo;
+        $config['upload_path'] = $ruta3;
+        $config['allowed_types'] = "*";
+        $config['max_size'] = "50000";
+        $config['max_width'] = "2000";
+        $config['max_height'] = "2000";
+		if(!file_exists($ruta))
+		{
+			mkdir($ruta);
+		}
+		if(!file_exists($ruta2))
+		{
+			mkdir($ruta2);
+		}
+		if(!file_exists($ruta3))
+		{
+			mkdir($ruta3);
+		}
+		if(!file_exists($mi_archivo))
+		{
+	        $this->load->library('upload', $config);
+	        
+	        if (!$this->upload->do_upload($mi_archivo)) {
+	            //*** ocurrio un error
+	            $data['uploadError'] = $this->upload->display_errors();
+	            echo $this->upload->display_errors();
+	            return;
+	        }
+		}
+		else
+		{
+			echo "Archivo ya existe";
+		}   		
+
+        $data['uploadSuccess'] = $this->upload->data();
+        $this->modelo->cargarArchivoBD($id_asignatura_instancia, $semestre, $anio, $rutaFinal);
+        $this->index();
+    }
+
+    function guardarArchivo()
+    {
+		if($_FILES["fileToUpload"]["error"]>0)
+		{
+			echo "error al cargar archivo";
+		}
+		else
+		{
+			$ruta = 'files/';
+			$archivo = $ruta.$_FILES["fileToUpload"]["name"];
+			if(!file_exists($ruta))
+			{
+				mkdir($ruta);
+			}
+			if(!file_exists($archivo))
+			{
+				$resultado = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $archivo);
+				if($resultado)
+				{
+					echo "Archivo Guardado";
+				}
+				else
+				{
+					echo "Error al guardar Archivo";
+				}
+			}
+			else
+			{
+				echo "Archivo ya existe";
+			}   		
+	    }
+    	$this->modelo->cargarArchivoServer($id_insert);
+
+	}
 }

@@ -104,6 +104,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<th>Anio</th>
 	<th></th>
 	<th></th>
+	<th></th>
 	<?$i=0;foreach($asignaturas as $row):?>
 		<tr class="trhideclass<?=$i?>">
 			<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
@@ -126,6 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 			<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
+			<td><button class="btn btn-success" onclick="cargarDatos(<?=$i?>)">Agregar Archivo</button></td>
 		</tr>
 	<?$i++;endforeach;?>
 	</table>
@@ -231,10 +233,133 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 	
 </div>
+
+<div id="myModal3" style="display: none;" class="modal" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+  				<h3 class="mt-5">Agregar Archivos al Curso</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          			<span aria-hidden="true">&times;</span>
+        		</button>
+			</div>
+			<div class="modal-body">
+
+			<form class="form-group"  method="post" name="cargarArchivo" id="cargarArchivo" enctype="multipart/form-data">
+
+            <div>
+
+				<div class="form-group">
+				<label for="nombreA" class="col-lg-2 control-label">Nombre</label>
+				<input type="hidden" id="idA">
+				<input type="hidden" id="refAsignaturaA">
+				<div class="col-lg-10">
+					<input type="text" class ="form-control" id="nombreA" disabled="disabled">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="seccionEdit" class="col-lg-2 control-label">Seccion</label>
+				<div class="col-lg-10">
+					<input type="text" class ="form-control" id="seccionA" disabled="disabled">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="semestreA" class="col-lg-2 control-label">Semestre</label>
+				<div class="col-lg-10">
+				<select id="semestreA" class="form-control" disabled="disabled">
+						<option value="1">Otoño</option>
+						<option value="2">Primavera</option>
+						<option value="3">Verano</option>
+						<option value="4">Invierno</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="anioA" class="col-lg-2 control-label">Año</label>
+				<div class="col-lg-10">
+					<input type="text" class ="form-control" id="anioA" disabled="disabled">
+				</div>
+			</div>
+			
+	        
+
+	                <label for="archivo" class="col-sm2 control-label">Elegir archivo</label>
+	              
+					<div class="col-lg-10">
+						<input type="file" id="archivoCurso" name="archivoCurso" accept="">
+						<input type="hidden" id="idA" name = idA>
+					</div>
+		
+
+
+	            </div>
+
+				<div class="modal-footer">
+				<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                <button  id="submit" value = "Submit"  name="import" class="btn btn-success" onclick="upload_file()">Cargar Archivo</button>
+				</div>
+			</form> 
+		</div>
+	</div>
+	
+</div>
 	
 
 </body>
 </html>
+
+<script>
+	function upload_file(){//Funcion encargada de enviar el archivo via AJAX
+				$(".upload-msg").text('Cargando...');
+				var inputFile = document.getElementById("archivoCurso");
+				var file = inputFile.files[0];
+				var data = new FormData();
+				data.append('archivoCurso',file);
+				var base_url = "<? echo base_url()?>";
+				console.log("uploading");
+
+
+				var idA = $("#idA").val();
+				data.append('idA', idA);
+				var nombreCurso = $("#nombreA").val();
+				data.append('nombreCurso', nombreCurso);
+				var anio = $("#anioA").val();
+				data.append('anio', anio);
+				var semestre = $("#semestreA").val();
+				data.append('semestre', semestre);
+				var nombreArchivo = $('#archivoCurso').prop('files')[0].name;
+				data.append('nombreArchivo', nombreArchivo);
+
+
+				
+				/*jQuery.each($('#fileToUpload')[0].files, function(i, file) {
+					data.append('file'+i, file);
+				});*/
+							
+				$.ajax({
+					url: base_url+"index.php/instanciaAsignatura/cargarArchivo",        // Url to which the request is send
+					type: "POST",             // Type of request to be send, called as method
+					data: data, 			  // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+					//idA: idA,
+					//file: file,
+					contentType: false,       // The content type used when sending data to the server.
+					cache: false,             // To unable request pages to be cached
+					processData:false,        // To send DOMDocument or non processed data file it is set to false
+					success: function(data)   // A function to be called if request succeeds
+					{
+						$(".upload-msg").html(data);
+						window.setTimeout(function() {
+						$(".alert-dismissible").fadeTo(500, 0).slideUp(500, function(){
+						$(this).remove();
+						});	}, 5000);
+					}
+				});
+				
+			}
+</script>
 
 <script type="text/javascript">
 	$("#searchFilter").change(function(){
@@ -378,12 +503,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 
 
-	function CargarExcel(){
+	function CargarExcel(indice){
 		console.log("cargar Excel")
 
 		//$("#idEdit").val($("#id"+indice).val());
 
 		$("#myModal2").modal('show');
+	}
+
+	function cargarDatos(indice){
+		var base_url = "<? echo base_url()?>";
+		console.log("mostrando modal 3")
+		console.log("indice: " + indice)
+		console.log($("#id"+indice).val());
+		$("#idA").val($("#id"+indice).val());
+		console.log("idA: "+$("#idA").val());
+		$("#refAsignaturaA").val($("#refAsignatura"+indice).val());
+		console.log($("idA").val());
+		$("#nombreA").val($("#nombre"+indice).val());
+		console.log($("idA").val());
+		$("#seccionA").val($("#seccion"+indice).val());
+		$("#semestreA").val($("#semestre"+indice).val());
+		$("#anioA").val($("#anio"+indice).val());
+
+
+		//$("#idEdit").val($("#id"+indice).val());
+
+		$("#myModal3").modal('show');
 	}
 
 	function enviarExcel() {
@@ -415,6 +561,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
 
 	}
+
+
 
 
 </script>
