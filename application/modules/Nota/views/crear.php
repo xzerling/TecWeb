@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 				<div class="col-md-12">
 					<strong>Nota</strong>
-					<input type="double" name="nota" class="form-control" placeholder="Ingrese un numero" required="">
+					<input type="double" name="nota" class="form-control" placeholder="Ingrese un numero, por ejemplo: 7.0" required="">
 				</div>
 
 				<div class="col-md-12">
