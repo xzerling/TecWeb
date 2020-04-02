@@ -122,4 +122,23 @@ class InstanciaAsignatura extends MY_Controller {
     	$refInstAsignatura = $this->input->post('refInstAsignatura');
     	$this->modelo->eliminarAsignacion($refInstAsignatura);
     }
+
+    function crearAlumno()
+    {
+    	$asignaturas = $this->modelo->obtenerTodasAsignaturas();
+    	$data['asignaturas'] = $asignaturas;
+
+    	$this->load->view('crearAlumno',$data);
+    }
+
+    function guardarAlumno()
+    {
+    	$matricula = $this->input->post("matricula");
+    	$nombre = $this->input->post("nombre");
+    	$correo = $this->input->post("correo");
+    	$refInstAsignatura = $this->input->post("refInstAsignatura");
+
+    	$this->modelo->guardarAlumno($matricula, $nombre, $correo, $refInstAsignatura);
+    	redirect(base_url('index.php/instanciaAsignatura'));
+    }
 }
