@@ -36,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<strong>Asignatura</strong>
 					<select name="refInstAsignatura" class="form-control">
 						<?php foreach($resultados as $row):?>
-							<?php echo '<option value="'.$row->id.'"> '.$row->nombre.' </option>';?>
+							<?php echo '<option value="'.$row->id.'"> '.$row->nombre.' '.$row->anio.' '.$row->semestre.' '.$row->seccion.'</option>';?>
 						<?php endforeach;?>
 					</select>
 				</div>
