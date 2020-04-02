@@ -9,11 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+      	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 	<div class="container">
 		<h1>Crear una Nota</h1>
@@ -22,20 +22,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="form-group">
 
 				<div class="col-md-12">
-					<strong>Seleccione la asignatura</strong>
+					<strong>Seleccione la evaluación</strong>
 					<select name="asignatura" class="form-control" id="asignatura"> 
-						<? foreach($asignaturas as $row):?> 
-							<? echo '<option value="'.$row['id'].'"> '.$row['nombre'].' </option>';?> 
-						<? endforeach;?> 
+						<?$i=0;foreach($asignaturas as $row):?>
+
+							<? echo '<option value="'.$row['id'].'"> '.$row['id'].'. '.$row['nombre'].' '.$row['anio'].' '.$row['semestre'].' '.$row['seccion'].' </option>';?> 
+						<?$i++;endforeach;?>
 					</select> 
 				</div>
 				<div class="col-md-12">
 					<strong>Fecha Evaluacion</strong>
-					<input type="date" id="evaluacion" name="evaluacion" class="form-control" placeholder="Ingrese Fecha" required="">
+
+					<?$i=0;foreach($asignaturas as $row):?>
+
+						<input type="hidden" id="fecha<?=$row['id']?>" value="<?=$row['fecha']?>" readonly> 
+						<?$i++;endforeach;?>
+					<input type="text" id="fecha" name="fecha" class="form-control" value= "" placeholder="Seleccione evaluacion" required="" disabled="disabled">
 				</div>
 				<div class="col-md-12">
-					<strong>Matricula Alumno</strong>
-					<input type="text" class="form-control" name="matricula" id="matricula" placeholder="123" required>
+					<strong>Alumno</strong>
+					<select name="alumno" class="form-control" id="alumno"> 
+						<?$i=0;foreach($alumnos as $row):?>
+
+							<? echo '<option value="'.$row['matricula'].'"> '.$row['nombre'].'</option>';?> 
+						<?$i++;endforeach;?>
+					</select> 
 				</div>
 				<div class="col-md-12">
 					<strong>Nota</strong>
@@ -51,3 +62,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </body>
 </html>
+
+<script type="text/javascript">
+	$("#asignatura").change(function(){
+	  console.log("cambio");
+
+	  var id = $("#asignatura").val();
+	  obtenerAlumnos(id);
+
+	  var fechaInicial = $("#fecha"+id).val();
+	  $("#fecha").val(fechaInicial);
+	}); 
+
+	var id = $("#asignatura").val();
+	var fechaInicial = $("#fecha"+id).val();
+	$("#fecha").val(fechaInicial);
+
+	function obtenerAlumnos(id){
+		var base_url = "<? echo base_url()?>";
+		console.log("obtenerAlumnos");
+		console.log(id);
+		$.post(
+			base_url+"index.php/nota/cargarAlumnosNuevo",
+			{id:id},
+			function(url, data){
+				//var html = $.parseHTML(data);
+				//alert(url);
+				var x = document.createElement('div');
+   				x.innerHTML = url;
+
+				var nuevosAlumnos = x.querySelector('#alumno').innerHTML;
+				document.querySelector('#alumno').innerHTML = nuevosAlumnos;
+				
+			}
+		)
+	}
+</script>

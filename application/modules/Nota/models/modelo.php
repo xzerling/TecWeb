@@ -7,11 +7,14 @@ class modelo extends CI_Model{
 	}
 
 	public function listarNotas(){
-		$query = "SELECT CalificarEvaluacion.id, asignatura.nombre AS asignatura, evaluacion.fecha, alumno.nombre, calificarevaluacion.nota 
-				  FROM asignatura, evaluacion, alumno, calificarevaluacion 
-  				  WHERE asignatura.id = calificarevaluacion.refInstAsignatura 
-				  AND evaluacion.id = calificarevaluacion.refEvaluacion 
-				  AND alumno.matricula = calificarevaluacion.refAlumno";
+		$query = "SELECT CalificarEvaluacion.id, instanciaasignatura.id as idInstanciaAsignatura, asignatura.nombre AS asignatura, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, evaluacion.fecha, alumno.nombre, alumno.matricula, calificarevaluacion.nota 
+			FROM calificarevaluacion, alumno, alumnoasignatura, evaluacion, instanciaasignatura, asignatura
+			WHERE calificarevaluacion.refAlumno = alumnoasignatura.refAlumno
+			AND alumno.matricula = alumnoasignatura.refAlumno
+			AND evaluacion.id = calificarevaluacion.refEvaluacion
+			AND evaluacion.refInstAsignatura = instanciaasignatura.id
+			AND asignatura.id = instanciaasignatura.refAsignatura
+			AND asignatura.estado = '1' ";
 
 		$resultado = $this->db->query($query)->result();
 		return $resultado;
@@ -66,8 +69,33 @@ class modelo extends CI_Model{
 		return $output; 
 	}
 
+	public function cargarDatosNuevo(){ 
+		$query = "SELECT evaluacion.id, evaluacion.fecha, instanciaasignatura.id as idInstanciaAsignatura, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, asignatura.nombre
+			FROM evaluacion, instanciaasignatura, asignatura
+			WHERE evaluacion.refInstAsignatura = instanciaasignatura.id
+			AND asignatura.id = instanciaasignatura.refAsignatura
+			AND asignatura.estado = '1' "; //solo las asignaturas disponibles
+ 
+		$output = $this->db->query($query)->result_array();
+		
+		return $output; 
+	}
+
 	public function cargarAlumnos(){
 		$query = "SELECT matricula, nombre FROM alumno";
+		$output = $this->db->query($query)->result_array();
+		return $output;
+	}
+
+	public function cargarAlumnosNuevo($id){
+		$query = "SELECT alumno.nombre, alumno.matricula
+			FROM alumno, alumnoasignatura, evaluacion, instanciaasignatura, asignatura
+			WHERE alumno.matricula = alumnoasignatura.refAlumno
+			AND alumnoasignatura.refInstAsignatura = instanciaasignatura.id
+			AND evaluacion.refInstAsignatura = instanciaasignatura.id
+			AND asignatura.id = instanciaasignatura.refAsignatura
+			AND asignatura.estado = '1'
+            AND evaluacion.id = '$id' ";
 		$output = $this->db->query($query)->result_array();
 		return $output;
 	}
@@ -86,8 +114,7 @@ class modelo extends CI_Model{
 		$this->db->delete('CalificarEvaluacion');
 	}
 
-	function guardarDatos($refInstAsignatura, $refEvaluacion, $refAlumno, $nota){
-		$data['refInstAsignatura'] = $refInstAsignatura;
+	function guardarDatos($refEvaluacion, $refAlumno, $nota){
 		//echo $seccion;
 		$data['refEvaluacion']=$refEvaluacion;
 		$data['refAlumno'] =$refAlumno;

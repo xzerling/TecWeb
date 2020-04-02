@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Vista Evaluacion</title>
+	<title>Vista Notas</title>
 
 	<style type="text/css">
 
@@ -91,13 +91,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
 	!-->
-		<a href="<?php echo base_url('index.php/nota/crear')?>">Agregar Nota</a>
+		<a href="<?php echo base_url('index.php/nota/crear')?>" class="btn btn-success">
+          <span class="glyphicon glyphicon-plus"></span> Agregar Nota
+        </a>
 
 		<table class="table table-striped" align="center">
 			<thead>
 				<tr>
 					<th>Asignatura</th>
 					<th>Evaluacion</th>
+					<th>Año</th>
+					<th>Semestre</th>
+					<th>Sección</th>
 					<th>Alumno</th>
 					<th>Nota</th>
 				</tr>
@@ -110,10 +115,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input type="hidden" id="refInstAsignatura<?=$i?>" value="<?=$row->asignatura?>" readonly> 
 							<?php echo $row->asignatura; ?> 
 						</td>
+
 						<td >
 							<input type="hidden" id="evaluacion<?=$i?>" value="<?=$row->fecha?>" readonly> 
 							<?php echo $row->fecha; ?> 
 						</td>
+
+						<td >
+							<input type="hidden" id="anio<?=$i?>" value="<?=$row->anio?>" readonly> 
+							<?php echo $row->anio; ?> 
+						</td>
+
+						<td >
+							<input type="hidden" id="semestre<?=$i?>" value="<?=$row->semestre?>" readonly> 
+							<?php echo $row->semestre; ?> 
+						</td>
+
+						<td >
+							<input type="hidden" id="seccion<?=$i?>" value="<?=$row->seccion?>" readonly> 
+							<?php echo $row->seccion; ?> 
+						</td>
+
 						<td >
 							<input type="hidden" id="alumno<?=$i?>" value="<?=$row->nombre?>" readonly> 
 							<?php echo $row->nombre; ?> 

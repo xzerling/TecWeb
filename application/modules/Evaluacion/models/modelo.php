@@ -7,14 +7,14 @@ class modelo extends CI_Model{
 	}
 
 	public function listarEvaluaciones(){
-		$query = "select evaluacion.id,evaluacion.fecha, evaluacion.diasAntes, evaluacion.diasDespues, asignatura.nombre, instanciaasignatura.seccion, evaluacion.refInstAsignatura from evaluacion, instanciaasignatura, asignatura where evaluacion.refInstAsignatura = instanciaasignatura.id and instanciaasignatura.refAsignatura = asignatura.id";
+		$query = "select evaluacion.id,evaluacion.fecha, evaluacion.diasAntes, evaluacion.diasDespues, asignatura.nombre, instanciaasignatura.anio,instanciaasignatura.semestre, instanciaasignatura.seccion, evaluacion.refInstAsignatura from evaluacion, instanciaasignatura, asignatura where evaluacion.refInstAsignatura = instanciaasignatura.id and instanciaasignatura.refAsignatura = asignatura.id";
 
 		$resultado = $this->db->query($query)->result();
 		return $resultado;
 	}
 
 	public function obtenerAsignaturas(){
-		$query = "select instanciaasignatura.id, asignatura.nombre from asignatura, instanciaasignatura where asignatura.id = instanciaasignatura.refAsignatura";
+		$query = "select instanciaasignatura.id, asignatura.nombre, instanciaasignatura.anio, instanciaasignatura.semestre, instanciaasignatura.seccion from asignatura, instanciaasignatura where asignatura.id = instanciaasignatura.refAsignatura";
 
 		$resultado = $this->db->query($query)->result();
 		return $resultado;

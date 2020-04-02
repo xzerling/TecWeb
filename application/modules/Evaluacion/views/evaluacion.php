@@ -92,8 +92,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 	!-->
 		<div class="container">
-			<a href="<?php echo base_url('index.php/evaluacion/crear/')?>"><button class="btn btn-warning"> Crear Evaluacion </button></a>
-			<a href="<?= base_url('index.php/evaluacion/monitoreo')?>"><button class="btn btn-success">Monitorear</button></a>
+			<a href="<?php echo base_url('index.php/evaluacion/crear/')?>"><button class="btn btn-success"> Crear Evaluacion </button></a>
+			<a href="<?= base_url('index.php/evaluacion/monitoreo')?>"><button class="btn btn-info">Monitorear</button></a>
 		</div>
 		
 
@@ -104,6 +104,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<th>Dias Antes</th>
 					<th>Dias Despues</th>
 					<th>Asignatura</th>
+					<th>Año </th>
+					<th>Semestre </th>
 					<th>Seccion </th>
 				</tr>
 			</thead>
@@ -127,6 +129,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<?php echo $row->nombre; ?>
 							<input type="hidden" id="refInstAsignatura<?=$i?>" value="<?= $row->refInstAsignatura?>" readonly> 
 						</td>
+						<td > <?php echo $row->anio; ?></td>
+						<td > <?php echo $row->semestre; ?></td>
 						<td > <?php echo $row->seccion; ?></td>
 						<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 						<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
