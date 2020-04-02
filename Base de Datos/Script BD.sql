@@ -4,6 +4,12 @@ CREATE TABLE Administrador(
 	clave varchar(32) NOT NULL
 );
 
+CREATE TABLE DirectorEscuela(
+	correo varchar(32) NOT NULL PRIMARY KEY,
+	nombre varchar(32) NOT NULL,
+	clave varchar(32) NOT NULL
+);
+
 CREATE TABLE Profesor(
 	correo varchar(32) NOT NULL PRIMARY KEY,
 	nombre varchar(32) NOT NULL,
@@ -110,4 +116,9 @@ CREATE TABLE RealizarReunion(
 	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id),
 	refReunion int NOT NULL REFERENCES Reunion(id),
 	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula)
+);
+
+CREATE TABLE AlumnoAsignatura(
+	refAlumno varchar(16) NOT NULL REFERENCES Alumno(matricula),
+	refInstAsignatura int NOT NULL REFERENCES InstanciaAsignatura(id)
 );

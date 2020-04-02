@@ -32,10 +32,21 @@ class Nota extends MY_Controller {
 
 	    function crear()
 	{
-		$data['asignaturas'] = $this->modelo->cargarDatos();
-		$data2['alumnos'] = $this->modelo->cargarAlumnos();
-		$this->load->view('header');
+		$data['asignaturas'] = $this->modelo->cargarDatosNuevo();
+		$data['alumnos'] = $this->modelo->cargarAlumnosNuevo(1);
+
 		$this->load->view('crear', $data);
+	}
+
+	function cargarAlumnosNuevo()
+	{
+		$id = $this->input->post("id");
+
+		$data['alumnos'] = $this->modelo->cargarAlumnosNuevo($id);
+		$data['asignaturas'] = $this->modelo->cargarDatosNuevo();
+
+		$this->load->view('crear', $data);
+		//return $data;
 	}
 
     function guardarCambios(){
@@ -55,13 +66,12 @@ class Nota extends MY_Controller {
 
     public function crearNota()
 	{
-		$refInstAsignatura = $this->input->post("asignatura");
-		$refEvaluacion 	= $this->input->post("evaluacion");
-		$refAlumno 	= $this->input->post("matricula");
+		$refEvaluacion 	= $this->input->post("asignatura");
+		$refAlumno 	= $this->input->post("alumno");
 		$nota	= $this->input->post("nota");
 
 
-		$this->modelo->guardarDatos($refInstAsignatura, $refEvaluacion, $refAlumno, $nota);
+		$this->modelo->guardarDatos($refEvaluacion, $refAlumno, $nota);
 		redirect(base_url('index.php/nota'));
 	}
 }

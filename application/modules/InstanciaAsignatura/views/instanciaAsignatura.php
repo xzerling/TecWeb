@@ -60,7 +60,11 @@
 	</div>
 	
 
-	<a href="<?= base_url()?>index.php/instanciaAsignatura/asignaturasAsignadas"><button class="btn btn-success">Asignaturas Asignadas</button></a>
+	<div class="container">
+		<a href="<?= base_url()?>index.php/instanciaAsignatura/asignaturasAsignadas"><button class="btn btn-success">Asignaturas Asignadas</button></a>
+		<a href="<?= base_url()?>index.php/instanciaAsignatura/crearAlumno"><button class="btn btn-secondary">Asignar Alumnos</button></a>
+	</div>
+
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
