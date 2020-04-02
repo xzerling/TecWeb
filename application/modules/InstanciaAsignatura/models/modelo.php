@@ -73,6 +73,19 @@ class modelo extends CI_Model{
 		$output = $this->db->query($query)->result_array();
 		
 		return $output; 
+	}
+
+	public function cargarDatosDocente($correo){ 
+		$query = "select instanciaasignatura.id, asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, instanciaasignatura.refAsignatura
+		from asignatura, instanciaasignatura, profesorasignatura
+		where asignatura.id = instanciaasignatura.refAsignatura
+		AND asignatura.estado = 1
+        AND profesorasignatura.refInstAsignatura = instanciaasignatura.id
+        AND profesorasignatura.refProfesor = '$correo'"; //solo las asignaturas disponibles
+ 
+		$output = $this->db->query($query)->result_array();
+		
+		return $output; 
 	} 
 
 	public function obtenerAsignaturas(){

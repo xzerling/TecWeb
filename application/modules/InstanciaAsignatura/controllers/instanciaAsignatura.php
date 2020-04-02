@@ -41,7 +41,9 @@ class InstanciaAsignatura extends MY_Controller {
     function crear()
 	{
 		$data['asignaturas'] = $this->modelo->obtenerAsignaturas();
-		$this->load->view('header');
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        $this->load->view('header2', $data);
 		$this->load->view('crear', $data);
 	}
 
@@ -50,7 +52,9 @@ class InstanciaAsignatura extends MY_Controller {
 		$output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-        $this->load->view('header');
+        $data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        $this->load->view('header2', $data);
 		$this->load->view('instanciaAsignatura', $data);
 	}
 
@@ -71,18 +75,23 @@ class InstanciaAsignatura extends MY_Controller {
 
 	public function index($output = null)
 	{
-		/*$crud = new grocery_CRUD();
- 
-        $crud->set_table('asignatura');
-        $crud->columns('id','nombre','estado');
-        $output = $crud->render();*/
 
-        
-        $output = $this->modelo->cargarDatos();
+        $data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        $this->load->view('header2', $data);
 
-		$data['asignaturas'] = $output;
-        $this->load->view('header');
-		$this->load->view('instanciaAsignatura', $data);
+        if($data['perfilBD'] == 1){ //admin
+            $output = $this->modelo->cargarDatos();
+            $data['asignaturas'] = $output;
+
+		  $this->load->view('instanciaAsignatura', $data);
+        }
+        elseif($data['perfilBD'] == 2){ //docente
+            $data['correoBD'] = $this->session->userdata('correo');
+            $output = $this->modelo->cargarDatosDocente($data['correoBD']);
+            $data['asignaturas'] = $output;
+            $this->load->view('instanciaAsignaturaDocente', $data);
+        }
 	}
 
     function cargarAlumnos()
@@ -100,7 +109,9 @@ class InstanciaAsignatura extends MY_Controller {
     	$data['asignaturas'] = $asignaturas;
     	$data['profesores'] = $profesores;
 
-		$this->load->view('header');
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        $this->load->view('header2', $data);
     	$this->load->view('asignarProfesor', $data);
     }
 
@@ -114,7 +125,9 @@ class InstanciaAsignatura extends MY_Controller {
     {
     	$asignaturas = $this->modelo->asignaturasAsignadas();
 		$data['asignaturas'] = $asignaturas;
-		$this->load->view('header');
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        $this->load->view('header2', $data);
     	$this->load->view('asignaturasAsignadas',$data);
     }
 

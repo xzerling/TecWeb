@@ -4,15 +4,8 @@
 
 	<div id="asignaturas">
 
-		<button class="btn btn-secondary" onclick="CargarExcel()">Cargar Alumnos</button>
 
-		<a href="<?=base_url()?>index.php/instanciaAsignatura/crear" class="btn btn-success">
-			<span class="glyphicon glyphicon-plus"></span> Agregar Asignatura
-			</a>
-		<form method="post" action="<?=base_url()?>index.php/asignatura">
-			<button class="btn btn-warning" type="submit">BD Asignaturas</button>
-		</form>
-		<br>
+
 		<div id="filtrar" class="col-lg-3">
 			<input type="text" class ="form-control" id="searchFilter" placeholder="Buscar">
 			<select id="atributoFilter" class="form-control">
@@ -23,7 +16,7 @@
 			<button class="btn btn-secondary" onclick="filtrar()">Filtrar</button>
 			<br>
 		</div>
-	
+			<br>
 		<table id="tabla" name="tabla" class="table table-striped">
 			<th>Nombre</th>
 			<th>Seccion</th>
@@ -59,11 +52,6 @@
 
 	</div>
 	
-
-	<div class="container">
-		<a href="<?= base_url()?>index.php/instanciaAsignatura/asignaturasAsignadas"><button class="btn btn-success">Asignaturas Asignadas</button></a>
-		<a href="<?= base_url()?>index.php/instanciaAsignatura/crearAlumno"><button class="btn btn-secondary">Asignar Alumnos</button></a>
-	</div>
 
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

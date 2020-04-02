@@ -59,7 +59,9 @@ class Asignatura extends MY_Controller {
         $output = $this->modelo->cargarDatos();
 
 		$data['asignaturas'] = $output;
-        $this->load->view('header');
+		$data['nombreBD'] = $this->session->userdata('nombre');
+		$data['perfilBD'] = $this->session->userdata('perfil');
+        $this->load->view('header2', $data);
 		$this->load->view('asignatura', $data);
 	}
 }

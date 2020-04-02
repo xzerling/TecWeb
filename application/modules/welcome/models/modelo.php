@@ -10,6 +10,7 @@ class modelo extends CI_Model{
   		$query1= "SELECT * FROM administrador WHERE administrador.correo =" . '"'.$correo.'"' . "AND administrador.clave =" . '"'.$clave.'"';
 	  	$query2= "SELECT * FROM profesor WHERE profesor.correo =" . '"'.$correo.'"'. "AND profesor.clave =" . '"'.$clave.'"';
 	  	$query3= "SELECT * FROM ayudante WHERE ayudante.correo =" . '"'.$correo.'"'. "AND ayudante.clave =" . '"'.$clave.'"';
+
 	  	$resultado = $this->db->query($query1)->result();
 	  	if(count($resultado) != 0)
 	  	{
@@ -29,32 +30,13 @@ class modelo extends CI_Model{
 	  	}
 		return false;
 
-
-
-			/*
-			$this->db->select("*");
-			$this->db->where('correo',$correo);
-			$this->db->where('clave',$clave);
-			
-			$retorno = $this->db->get ('administrador')->num_rows();
-			if ($retorno != 0) {
-				return true;
-			}
-			$retorno = $this->db->get ('profesor')->num_rows();
-			if ($retorno != 0) {
-				return true;
-			}
-			$retorno = $this->db->get ('ayudante')->num_rows();
-			if ($retorno != 0) {
-				return true;
-			}
-
-			return false;*/
 	}
+
 	function buscarUsuario($correo, $perfil){
 		$this->db->select("nombre");
 		$this->db->where('correo',$correo);
 		$this->db->limit(1);
+		
 		if($perfil ==1){
 			$result = $this->db->get ('administrador')->result();
 			foreach ($result as $fila) {

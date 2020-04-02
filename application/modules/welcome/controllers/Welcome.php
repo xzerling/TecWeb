@@ -15,16 +15,20 @@ class Welcome extends MY_Controller {
 
 		if ($this->session->userdata('login')){
 			if ($this->session->userdata('perfil')== 1) { // admin
-				$this->Dashboard->index($data);
+				$this->load->view("header2", $data);
+				$this->load->view("dashboard", $data);
+				$this->load->view("fother");
 			}
 			if ($this->session->userdata('perfil')== 2) {// Profesor 
 				//$this->Dashboard->index($data);
-				$this->load->view("header2");
-				$this->load->view("dashboard");
+				$this->load->view("header2", $data);
+				$this->load->view("dashboard", $data);
 				$this->load->view("fother");
 			}
 			if ($this->session->userdata('perfil')== 3) {// Ayudante 
-				$this->Dashboard->index($data);
+				$this->load->view("header2", $data);
+				$this->load->view("dashboard", $data);
+				$this->load->view("fother");
 			}
 		}else{
 				$this->load->view('header');
