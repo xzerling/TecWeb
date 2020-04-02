@@ -45,6 +45,16 @@ class reportes extends MY_Controller
 		$this->load->view('reportes');
 		$this->load->view('cursos', $data);
 	}
+
+	public function promediosCursos()
+	{
+		$promedios = $this->modelo->obtenerPromedios();
+
+		$data['promedios'] = $promedios;
+
+		$this->load->view('reportes');
+		$this->load->view('promediosCursos', $data);
+	}
 }
 
 ?>

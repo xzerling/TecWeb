@@ -72,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </head>
 <body>
+		<h4>Cursos con las notas al día</h4>
 
 		<div class="container">
 			<table class="table table-striped"> 

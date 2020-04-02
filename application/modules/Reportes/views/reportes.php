@@ -77,6 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<a href="<?= base_url('index.php/reportes/profesoresAlDia')?>"><button class="btn btn-success">Profes al Dia</button></a> 
 		<a href="<?= base_url('index.php/reportes/profesoresAtrasados')?>"><button class="btn btn-danger">Profes Atrasados</button></a>
 		<a href="<?= base_url('index.php/reportes/cantidadAlumnos')?>"><button class="btn btn-warning">N° de Alumnos</button></a>
+		<a href="<?= base_url('index.php/reportes/promediosCursos')?>"><button class="btn btn-success">Prom Cursos</button></a>
 	</div>
 
 </head>

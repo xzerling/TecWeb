@@ -59,6 +59,21 @@ class modelo extends CI_Model
 
 		return $cursos;
 	}
+
+	public function obtenerPromedios()
+	{
+		$query = "SELECT asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, FORMAT(AVG(calificarevaluacion.nota),1) as promedio 
+			FROM asignatura, instanciaasignatura, evaluacion, calificarevaluacion 
+			WHERE evaluacion.id = calificarevaluacion.refEvaluacion 
+			AND instanciaasignatura.id = evaluacion.refInstAsignatura 
+			AND instanciaasignatura.refAsignatura = asignatura.id 
+			GROUP BY asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio 
+			ORDER BY promedio DESC ";
+
+		$promedios = $this->db->query($query)->result();
+
+		return $promedios;
+	}
 }
 
 ?>

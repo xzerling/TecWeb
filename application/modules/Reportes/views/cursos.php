@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body>
 
+	<h4>Cantidad de alumnos por asignatura </h4>
 	<div class="container">
 		<table class="table table-striped">
 			<thead>

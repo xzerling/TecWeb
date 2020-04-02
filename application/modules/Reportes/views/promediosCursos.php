@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Profesores al dia</title>
+	<title>Promedios cursos</title>
 
 	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -72,26 +72,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </head>
 <body>
-		<h4> Cursos con las notas atrasadas</h4>
+		<h4>Promedios de los cursos</h4>
+
 		<div class="container">
 			<table class="table table-striped"> 
 				<thead>
 					<tr>
-						<th>Profesor</th>
 						<th>Asignatura</th>
 						<th>Seccion</th>
 						<th>Semestre</th>
 						<th>Año</th>
+						<th>Promedio</th>
 					</tr>
 				</thead>
 				<tbody>
-					<? foreach($profesores as $row):?>
+					<? foreach($promedios as $row):?>
 						<tr>
 							<th><? echo $row->nombre; ?></th>
-							<th><? echo $row->nombreasignatura; ?></th>
 							<th><? echo $row->seccion; ?></th>
 							<th><? echo $row->semestre; ?></th>
 							<th><? echo $row->anio; ?></th>
+							<th><? echo $row->promedio; ?></th>
 						</tr>
 					<? endforeach; ?>
 				</tbody>
