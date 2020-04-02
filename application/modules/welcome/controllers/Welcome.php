@@ -40,6 +40,7 @@ class Welcome extends MY_Controller {
 				$this->load->view('listProfe');
 				$this->load->view('logProfe');
 				$this->load->view('fother');
+				//$this->load->view('sendNotification');
 		}
 		
 
