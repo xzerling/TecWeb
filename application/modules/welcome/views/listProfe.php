@@ -176,3 +176,12 @@
 </div>
 <br>
 <br>
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "7f114f51-920e-4a37-b145-7866c7184c11",
+    });
+  });
+</script>
