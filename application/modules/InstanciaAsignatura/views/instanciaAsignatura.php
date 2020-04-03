@@ -116,6 +116,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
 				<p><?=$row['nombre']?></p>
 			</td>
+
+			<td><input type="hidden" id="seccion<?=$i?>" value="<?=$row['seccion']?>" readonly>
+						<p><?=$row['seccion']?></p>
+					</td>
+
 					<td><input type="hidden" id="semestre<?=$i?>" value="<?=$row['semestre']?>" readonly>
 						<p><?=$row['semestre']?></p>
 					</td>
