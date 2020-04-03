@@ -99,7 +99,7 @@ class Evaluacion extends MY_Controller {
 			$data['evaluadas'] = $this->modelo->obtenerEvaluadas();
 			$data['pendientes'] = $this->modelo->obtenerPendientes();
 			$data['atrasadas'] = $this->modelo->obtenerAtrasadas();
-			$this->load->view('header'. $data);
+			$this->load->view('header');
 			$this->load->view('monitoreo',$data);
 		}
 		elseif($data['perfilBD']== 2)
