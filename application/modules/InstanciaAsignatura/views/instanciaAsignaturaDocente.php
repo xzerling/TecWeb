@@ -128,7 +128,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</td>
 					<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 					<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
-					<td><button class="btn btn-success" onclick="cargarDatos(<?=$i?>)">Agregar Archivo</button></td>
+					<td><button class="btn btn-success" onclick="cargarDatoss(<?=$i?>)">Agregar Archivo</button></td>
 					<td><a href="<?=base_url()?>index.php/instanciaAsignatura/verDatos?idInstancia=<?=$row['id']?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ver Archivos</a></td>
 				</tr>
 			<?$i++;endforeach;?>
@@ -425,9 +425,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		}
 	}
 
-	function cargarDatos(indice)
+	function cargarDatoss(indice)
 	{
-/*
+
 		var base_url = "<? echo base_url()?>";
 		console.log("mostrando modal 3")
 		console.log("indice: " + indice)
@@ -440,10 +440,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		console.log($("idA").val());
 		$("#seccionA").val($("#seccion"+indice).val());
 		$("#semestreA").val($("#semestre"+indice).val());
-		$("#anioA").val($("#anio"+indice).val());*/
+		$("#anioA").val($("#anio"+indice).val());
 
 
-		//$("#idEdit").val($("#id"+indice).val());
+		$("#idEdit").val($("#id"+indice).val());
 
 		$("#myModal33").modal('show');
 	}
