@@ -91,9 +91,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
 	</div>
 	!-->
+
 		<a href="<?php echo base_url('index.php/nota/crear')?>" class="btn btn-success">
           <span class="glyphicon glyphicon-plus"></span> Agregar Nota
         </a>
+		<a href="<?php echo base_url('index.php/nota/paraCSV')?>" class="btn btn-success">
+          <span class="glyphicon glyphicon-plus"></span> Descargar Datos
+        </a>
+
 
        <div = class="container"> 
 		<table class="table table-striped" align="center">

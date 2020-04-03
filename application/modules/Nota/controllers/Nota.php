@@ -38,6 +38,51 @@ class Nota extends MY_Controller {
 		$this->load->view('crear', $data);
 	}
 
+	function paraCSV()
+	{
+				$query = "SELECT CalificarEvaluacion.id, instanciaasignatura.id as idInstanciaAsignatura, asignatura.nombre AS asignatura, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, evaluacion.fecha, alumno.nombre, alumno.matricula, calificarevaluacion.nota 
+			FROM calificarevaluacion, alumno, alumnoasignatura, evaluacion, instanciaasignatura, asignatura
+			WHERE calificarevaluacion.refAlumno = alumnoasignatura.refAlumno
+			AND alumno.matricula = alumnoasignatura.refAlumno
+			AND evaluacion.id = calificarevaluacion.refEvaluacion
+			AND evaluacion.refInstAsignatura = instanciaasignatura.id
+			AND asignatura.id = instanciaasignatura.refAsignatura
+			AND asignatura.estado = '1' ";
+
+		$resultado = $this->db->query($query)->result_array();	
+		$count = count($resultado);
+
+		//echo "asdadasd: ".$resultado['id'];
+
+
+
+		if($resultado > 0)
+		{
+		    $delimiter = ",";
+		    $filename = "notas.csv";
+		    $link = "<?=base_url()?>".'files/'.$filename;
+
+		    //create a file pointer
+		    $f = fopen('files/'.$filename, 'w');
+		    
+		    //set column headers
+		    $fields = array('Asignatura', 'Evaluacion', 'Anio', 'Semestre', 'Seccion', 'Alumno', 'Nota');
+		    fputcsv($f, $fields, $delimiter);
+		    
+		    //output each row of the data, format line as csv and write to file pointer
+		    $i = 0;
+		    foreach($resultado as $row){
+
+
+		        //$lineData = array($row->asignatura, $row->fecha, $row->anio, $row->semestre, $row->seccion, $row->alumno, $row->nota);
+		        fputcsv($f, $row, $delimiter);
+		        $i++;
+	    }
+	    redirect(base_url('/files/notas.csv'));
+
+	}
+}
+
 	function cargarAlumnosNuevo()
 	{
 		$id = $this->input->post("id");
@@ -64,7 +109,7 @@ class Nota extends MY_Controller {
 		$this->modelo->eliminarDato($id);
 	}
 
-    public function crearNota()
+    function crearNota()
 	{
 		$refEvaluacion 	= $this->input->post("asignatura");
 		$refAlumno 	= $this->input->post("alumno");
