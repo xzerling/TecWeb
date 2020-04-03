@@ -126,7 +126,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 			<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
-			<td><button class="btn btn-success" onclick="cargarDatos(<?=$i?>)">Agregar Archivo</button></td>
+			<td><button class="btn btn-success" onclick="cargarDatoss(<?=$i?>)">Agregar Archivo</button></td>
 			<td><a href="<?=base_url()?>index.php/instanciaAsignatura/verDatos?idInstancia=<?=$row['id']?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ver Archivos</a></td>
 			
 
@@ -601,6 +601,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$("#anioV").val($("#anio"+indice).val());
 
 		$("#myModal4").modal('show');
+	}
+
+		function cargarDatos(){
+		var base_url = "<? echo base_url()?>";
+		$.post(
+			base_url+"index.php/instanciaAsignatura/cargarDatos",
+			{},
+			function(url,data){
+				$("#listado").html(url,data);
+			}
+		);
 	}
 
 	function cargarDatoss(indice){
