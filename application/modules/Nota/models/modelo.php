@@ -16,6 +16,8 @@ class modelo extends CI_Model{
 			AND asignatura.id = instanciaasignatura.refAsignatura
 			AND asignatura.estado = '1' ";
 
+	
+
 		$resultado = $this->db->query($query)->result();
 		return $resultado;
 	}
