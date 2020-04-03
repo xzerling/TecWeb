@@ -3,7 +3,10 @@
 	<div class="container">
 		<h1>Profesores</h1>
 
-		<a href="<?= base_url('index.php/administracion/crear')?>">Agregar Profesor</a>
+		<a href="<?php echo base_url('index.php/administracion/crear')?>" class="btn btn-success">
+          <span class="glyphicon glyphicon-plus"></span> Agregar Profesor
+        </a>
+
 		<table class="table table-striped" align="center">
 			<thead>
 				<tr>

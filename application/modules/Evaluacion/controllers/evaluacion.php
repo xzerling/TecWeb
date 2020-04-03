@@ -25,16 +25,45 @@ class Evaluacion extends MY_Controller {
 
 	public function index()
 	{
-		$resultados['resultados'] = $this->modelo->listarEvaluaciones();
-		$this->load->view('header');
-		$this->load->view('evaluacion', $resultados);
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD']==1)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$resultados['resultados'] = $this->modelo->listarEvaluaciones();
+			$this->load->view('header',$data);
+			$this->load->view('evaluacion', $resultados);
+        }
+        elseif($data['perfilBD']==2)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$output = $this->modelo->listarEvaluacionesProfesor($data['correoBD']);
+        	$resultados['resultados'] = $output;
+        	$this->load->view('header', $data);
+        	$this->load->view('evaluacion',$resultados);
+        }	
 	}
 
 	public function crear()
 	{
-		$data['resultados'] = $this->modelo->obtenerAsignaturas();
-		$this->load->view('header');
-		$this->load->view('crear', $data);
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD'] == 1)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$data['resultados'] = $this->modelo->obtenerAsignaturas();
+			$this->load->view('header', $data);
+			$this->load->view('crear', $data);
+        }
+        elseif($data['perfilBD'] == 2)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$data['resultados'] = $this->modelo->obtenerAsignaturasDocente($data['correoBD']);
+        	$this->load->view('header', $data);
+        	$this->load->view('crear', $data);
+
+        }
+		
 	}
 
 	public function crear_evaluacion()
@@ -61,11 +90,28 @@ class Evaluacion extends MY_Controller {
 
 	public function monitoreo()
 	{
-		$data['evaluadas'] = $this->modelo->obtenerEvaluadas();
-		$data['pendientes'] = $this->modelo->obtenerPendientes();
-		$data['atrasadas'] = $this->modelo->obtenerAtrasadas();
-		$this->load->view('header');
-		$this->load->view('monitoreo',$data);
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+		
+		if($data['perfilBD'] == 1)
+		{
+			$data['correoBD'] = $this->session->userdata('correo');
+			$data['evaluadas'] = $this->modelo->obtenerEvaluadas();
+			$data['pendientes'] = $this->modelo->obtenerPendientes();
+			$data['atrasadas'] = $this->modelo->obtenerAtrasadas();
+			$this->load->view('header'. $data);
+			$this->load->view('monitoreo',$data);
+		}
+		elseif($data['perfilBD']== 2)
+		{
+			$data['correoBD'] = $this->session->userdata('correo');
+			$data['evaluadas'] = $this->modelo->obtenerEvaluadasDocente($data['correoBD']);
+			$data['pendientes'] = $this->modelo->obtenerPendientesDocente($data['correoBD']);
+			$data['atrasadas'] = $this->modelo->obtenerAtrasadasDocente($data['correoBD']);
+			$this->load->view('header', $data);
+			$this->load->view('monitoreo',$data);
+		}
+
 	}
 
 }

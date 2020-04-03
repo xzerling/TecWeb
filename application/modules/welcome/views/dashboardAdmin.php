@@ -25,7 +25,7 @@
                   <div class="face face2">
                       <div class="content">
                           <h3>Asignaturas</h3>
-                          <p>Texto descriptivo </p>
+                          <p>Ver asignaturas general </p>
                             <!--form method="post" action="<?=base_url()?>index.php/cambio">
                                <button type="submit">Entrar</button-->
                                <a href="<?=base_url()?>index.php/instanciaAsignatura">Entrar</a>
@@ -44,7 +44,7 @@
                   <div class="face face2">
                       <div class="content">
                           <h3>Evaluacion</h3>
-                          <p>Texto descriptivo </p>
+                          <p>Ver evaluaciones general </p>
                             <!--form method="post" action="<?=base_url()?>index.php/cambio">
                                <button type="submit">Entrar</button-->
                                <a href="<?=base_url()?>index.php/evaluacion">Entrar</a>
@@ -63,7 +63,7 @@
                   <div class="face face2">
                       <div class="content">
                          <h3>Notas</h3>
-                          <p>Texto descriptivo </p>
+                          <p>Ver notas general </p>
                                <a href="<?=base_url()?>index.php/nota">Entrar</a>
                       </div>
                   </div> 
@@ -88,7 +88,7 @@
                   <div class="face face2">
                       <div class="content">
                           <h3>Observación</h3>
-                          <p>Texto descriptivo </p>
+                          <p>Ver observaciones </p>
                             <!--form method="post" action="<?=base_url()?>index.php/cambio">
                                <button type="submit">Entrar</button-->
                                <a href="<?=base_url()?>index.php/observacion">Entrar</a>
@@ -107,7 +107,7 @@
                   <div class="face face2">
                       <div class="content">
                           <h3>Desempeño</h3>
-                          <p>Texto descriptivo </p>
+                          <p>Ver desempeño general </p>
                             <!--form method="post" action="<?=base_url()?>index.php/cambio">
                                <button type="submit">Entrar</button-->
                                <a href="<?=base_url()?>index.php/desempeno">Entrar</a>
@@ -116,9 +116,26 @@
                   </div> 
      </div> 
 
+     <div class="card" id="administracion">
+                  <div class="face face1">
+                      <div class="content">
+                          <img src="https://image.flaticon.com/icons/svg/2345/2345403.svg">
+                          <h3>Administración</h3>
+                      </div>
+                  </div>
+                  <div class="face face2">
+                      <div class="content">
+                          <h3>Administración</h3>
+                          <p>Crear profesores </p>
+                            <!--form method="post" action="<?=base_url()?>index.php/cambio">
+                               <button type="submit">Entrar</button-->
+                               <a href="<?=base_url()?>index.php/administracion">Entrar</a>
+                            <!--/form-->
+                      </div>
+                  </div> 
+     </div>      
   </div>
-</div>
-   
+</div>  
 
 
 
