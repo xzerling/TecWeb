@@ -192,6 +192,14 @@ class modelo extends CI_Model{
 
 	}
 
+	function listarAlumnos($refAsignatura)
+	{
+		$query = "SELECT alumno.nombre, alumno.matricula, alumno.correo FROM `alumno`, `alumnoAsignatura` WHERE alumnoasignatura.refAlumno = alumno.matricula AND alumnoasignatura.refInstAsignatura = " .'"'.$refAsignatura.'"';
+		$output = $this->db->query($query)->result_array();
+		
+		return $output; 
+	}
+
 	public function insertExcel($archivo)
 	{
 		    
@@ -203,12 +211,6 @@ class modelo extends CI_Model{
 		        $targetPath = $archivo;
 		        //move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
 		        //$reader = \vendor\IOFactory::createReaderForFile($archivo);
-
-		        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-	            $spreadsheet = $reader->load($archivo);
-     
-    			$sheetData = $spreadsheet->getActiveSheet()->toArray();
-   				print_r($sheetData);
 
 
 		        $Reader = new SpreadsheetReader($targetPath);
