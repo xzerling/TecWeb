@@ -80,6 +80,18 @@ class InstanciaAsignatura extends MY_Controller {
 		$this->load->view('instanciaAsignatura', $data);
 	}
 
+    function cargarDatosDocente(){
+        $data['correoBD'] = $this->session->userdata('correo');
+        $output = $this->modelo->cargarDatosDocente($data['correoBD']);
+
+        $data['asignaturas'] = $output;
+        $data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        
+        $this->load->view('header2', $data);            
+        $this->load->view('instanciaAsignaturaDocente', $data);
+    }
+
     function guardarCambios(){
 		$id  	= $this->input->post("id");
 		$seccion = $this->input->post("seccion");

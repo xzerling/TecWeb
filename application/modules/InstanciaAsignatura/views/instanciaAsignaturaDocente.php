@@ -477,7 +477,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	function cargarDatos(){
 		var base_url = "<? echo base_url()?>";
 		$.post(
-			base_url+"index.php/instanciaAsignatura/cargarDatos",
+			base_url+"index.php/instanciaAsignatura/cargarDatosDocente",
 			{},
 			function(url,data){
 				$("#listado").html(url,data);
