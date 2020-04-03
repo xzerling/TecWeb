@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//require_once('vendor/php-excel-reader/excel_reader2.php');
+//require_once('vendor/SpreadsheetReader.php');
+
 class InstanciaAsignatura extends MY_Controller {
 
 	/**
@@ -169,6 +172,8 @@ class InstanciaAsignatura extends MY_Controller {
 		        $i++;
     		}	
 		}
+
+
 	    redirect(base_url('/files/alumnos.csv'));
 
 
@@ -307,8 +312,11 @@ class InstanciaAsignatura extends MY_Controller {
     function cargarAlumnos()
     {
 
-    	$nombreArchivo = $this->input->post("");
+    	//$mi_archivo = 'archivo';
     	$root = 'files/';
+
+    	$direccion = $root."estudiantes.xlsx";
+    	$mi_archivo = $this->input->post("archivo");
 
         $config['upload_path'] = $root;
         $config['allowed_types'] = "*";
@@ -322,10 +330,50 @@ class InstanciaAsignatura extends MY_Controller {
         	mkdir($root);
         }
 
+	        $this->load->library('upload', $config);
+	        
+	        if (!$this->upload->do_upload($mi_archivo)) {
+	            //*** ocurrio un error
+	            $data['uploadError'] = $this->upload->display_errors();
+	            echo $this->upload->display_errors();
+	            return;
+	        }
 
-    	$archivo = $this->input->post("form_data");
-    	echo("archivo: "+$archivo);
-    	$this->modelo->insertExcel($archivo);
+
+        $Reader = new SpreadsheetReader('files/estudiantes.xlsx');
+        
+        $sheetCount = count($Reader->sheets());
+        for($i=0;$i<$sheetCount;$i++)
+        {
+            
+            $Reader->ChangeSheet($i);
+            
+            foreach ($Reader as $Row)
+            {
+          
+                $matriculas = "";
+                if(isset($Row[0])) {
+                    $matriculas = mysqli_real_escape_string($this->db(),$Row[0]);
+                }
+                
+                $nombres = "";
+                if(isset($Row[1])) {
+                    $nombres = mysqli_real_escape_string($this->db(),$Row[1]);
+                }
+				
+                $correo = "";
+                if(isset($Row[2])) {
+                    $correo = mysqli_real_escape_string($con,$Row[2]);
+                }
+                
+                if (!empty($nombres) || !empty($matriculas) || !empty($correo)) {
+                    $query = "insert into alumno(matricula, nombre, correo) values('".$matriculas."','".$nombres."','".$correo."')";
+                    $this->db->query($query);
+                }
+             }
+        
+         }
+
     }
 
     function cargarArchivo()

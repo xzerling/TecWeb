@@ -625,51 +625,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 
 	function enviarExcel() {
+
+		var inputFile = document.getElementById("file");
+		var file = inputFile.files[0];
+		var data = new FormData();
+		data.append('archivo',file);
 		var base_url = "<? echo base_url()?>";
-		var file = $('#file').prop('files')[0];
-	    var form_data = new FormData();                  
-   		form_data.append('archivo', file);
-   		alert(form_data.get("archivo"));  
+		console.log("uploading");
 
+		var nombreArchivo = $('#file').prop('files')[0].name;
+		console.log("nombre: "+nombreArchivo);
+
+
+		
+		/*jQuery.each($('#fileToUpload')[0].files, function(i, file) {
+			data.append('file'+i, file);
+		});*/
+					
 		$.ajax({
-		url: base_url+"index.php/instanciaAsignatura/cargarAlumnos",        // Url to which the request is send
-		type: "POST",             // Type of request to be send, called as method
-		data: data, 			  // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-		//idA: idA,
-		//file: file,
-		contentType: false,       // The content type used when sending data to the server.
-		cache: false,             // To unable request pages to be cached
-		processData:false,        // To send DOMDocument or non processed data file it is set to false
-		success: function(data)   // A function to be called if request succeeds
-		{
-			$(".upload-msg").html(data);
-			window.setTimeout(function() {
-			$(".alert-dismissible").fadeTo(500, 0).slideUp(500, function(){
-			$(this).remove();
-			});	}, 5000);
-		}
-	});
+			url: base_url+"index.php/instanciaAsignatura/cargarAlumnos",        // Url to which the request is send
+			type: "POST",             // Type of request to be send, called as method
+			data: data, 			  // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+			//idA: idA,
+			//file: file,
+			contentType: false,       // The content type used when sending data to the server.
+			cache: false,             // To unable request pages to be cached
+			processData:false,        // To send DOMDocument or non processed data file it is set to false
+			success: function(data)   // A function to be called if request succeeds
+			{
+				$(".upload-msg").html(data);
+				window.setTimeout(function() {
+				$(".alert-dismissible").fadeTo(500, 0).slideUp(500, function(){
+				$(this).remove();
+				});	}, 5000);
+			}
+		});
 
-	$.ajax(
 
-    {
-        url : base_url+"index.php/instanciaAsignatura/cargarAlumnos",
-        type: "POST",
-        contentType: false,
-        processData: false,
-        data: form_data,  
-        success:function(data, textStatus, jqXHR)
-        {
-        	console.log("funciona")
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            console.log("error al enviar el archivo")
-            console.log(textStatus)
-            console.log(errorThrown)
 
-        }
-    });
 
 	}
 

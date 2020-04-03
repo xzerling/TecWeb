@@ -212,12 +212,6 @@ class modelo extends CI_Model{
 		        //move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
 		        //$reader = \vendor\IOFactory::createReaderForFile($archivo);
 
-		        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-	            $spreadsheet = $reader->load($archivo);
-     
-    			$sheetData = $spreadsheet->getActiveSheet()->toArray();
-   				print_r($sheetData);
-
 
 		        $Reader = new SpreadsheetReader($targetPath);
 		        
