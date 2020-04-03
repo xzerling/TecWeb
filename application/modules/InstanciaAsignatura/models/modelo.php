@@ -73,6 +73,19 @@ class modelo extends CI_Model{
 		$output = $this->db->query($query)->result_array();
 		
 		return $output; 
+	}
+
+	public function cargarDatosDocente($correo){ 
+		$query = "select instanciaasignatura.id, asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, instanciaasignatura.refAsignatura
+		from asignatura, instanciaasignatura, profesorasignatura
+		where asignatura.id = instanciaasignatura.refAsignatura
+		AND asignatura.estado = 1
+        AND profesorasignatura.refInstAsignatura = instanciaasignatura.id
+        AND profesorasignatura.refProfesor = '$correo'"; //solo las asignaturas disponibles
+ 
+		$output = $this->db->query($query)->result_array();
+		
+		return $output; 
 	} 
 
 	public function obtenerAsignaturas(){
@@ -228,7 +241,7 @@ class modelo extends CI_Model{
 		$query = " 	select asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.id
 				   	from asignatura, instanciaasignatura 
 					where instanciaasignatura.refAsignatura = asignatura.id 
-					and instanciaasignatura.anio = YEAR(CURRENT_DATE) 
+					and asignatura.estado = 1 
 					and instanciaasignatura.id NOT IN (select refInstAsignatura FROM profesorasignatura)";
 
 		$asignaturas = $this->db->query($query)->result();
@@ -258,7 +271,8 @@ class modelo extends CI_Model{
 		$query = "select profesorasignatura.refProfesor, profesorasignatura.refInstAsignatura, profesor.nombre, asignatura.nombre as nombreasignatura,instanciaasignatura.seccion 
 					FROM asignatura, profesor, profesorasignatura, instanciaasignatura 
 					WHERE profesorasignatura.refProfesor = profesor.correo 
-					AND profesorasignatura.refInstAsignatura = instanciaasignatura.id 
+					AND profesorasignatura.refInstAsignatura = instanciaasignatura.id
+					AND asignatura.estado = 1 
 					AND instanciaasignatura.refAsignatura = asignatura.id";
 
 		$asignaturas = $this->db->query($query)->result();
@@ -270,6 +284,31 @@ class modelo extends CI_Model{
 	{
 		$this->db->where("refInstAsignatura",$refInstAsignatura);
 		$this->db->delete('profesorasignatura');
+	}
+
+	public function obtenerTodasAsignaturas()
+	{
+		$query = "select asignatura.nombre, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, instanciaasignatura.id 
+				FROM asignatura, instanciaasignatura 
+				WHERE asignatura.id = instanciaasignatura.refAsignatura 
+				AND asignatura.estado = 1";
+
+		$asignaturas = $this->db->query($query)->result();
+		return $asignaturas;
+	}
+
+	public function guardarAlumno($matricula,$nombre,$correo,$refInstAsignatura)
+	{
+		$data['matricula'] = $matricula;
+		$data['nombre'] = $nombre;
+		$data['correo'] = $correo;
+
+		$this->db->insert('alumno', $data);
+
+		$alumnoasignatura['refAlumno'] = $matricula;
+		$alumnoasignatura['refInstAsignatura'] = $refInstAsignatura;
+
+		$this->db->insert('alumnoasignatura', $alumnoasignatura);
 	}
 }
 ?>

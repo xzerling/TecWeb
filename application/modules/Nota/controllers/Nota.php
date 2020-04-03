@@ -26,7 +26,7 @@ class Nota extends MY_Controller {
 	public function index()
 	{
 		$resultados['resultados'] = $this->modelo->listarNotas();
-
+		$this->load->view('header');
 		$this->load->view('nota', $resultados);
 	}
 

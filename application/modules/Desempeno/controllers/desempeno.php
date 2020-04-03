@@ -31,7 +31,7 @@ class Desempeno extends MY_Controller {
 		$output = $this->modelo->cargarDatos();
 
 		$data['calificaciones'] = $output;
-
+		$this->load->view('header');
 		$this->load->view('desempeno', $data);
 	}
 }

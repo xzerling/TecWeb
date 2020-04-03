@@ -4,6 +4,12 @@ CREATE TABLE Administrador(
 	clave varchar(32) NOT NULL
 );
 
+CREATE TABLE DirectorEscuela(
+	correo varchar(32) NOT NULL PRIMARY KEY,
+	nombre varchar(32) NOT NULL,
+	clave varchar(32) NOT NULL
+);
+
 CREATE TABLE Profesor(
 	correo varchar(32) NOT NULL PRIMARY KEY,
 	nombre varchar(32) NOT NULL,
