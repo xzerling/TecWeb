@@ -139,11 +139,90 @@ class InstanciaAsignatura extends MY_Controller {
 
 	}
 
-    function cargarAlumnos()
+
+
+    function paraCSV_Alumnos()
     {
-    	$archivo = $this->input->post("form_data");
-    	echo("archivo: "+$archivo);
-    	$this->modelo->insertExcel($archivo);
+    	$id = $this->input->get("idInstancia");	
+    	$output = $this->modelo->listarAlumnos($id);
+
+		if($output > 0)
+		{
+		    $delimiter = ",";
+		    $filename = "alumnos.csv";
+		    $link = "<?=base_url()?>".'files/'.$filename;
+
+		    //create a file pointer
+		    $f = fopen('files/'.$filename, 'w');
+		    
+		    //set column headers
+		    $fields = array('Nombre', 'Seccion', 'Semestre', 'Anio');
+		    fputcsv($f, $fields, $delimiter);
+		    
+		    //output each row of the data, format line as csv and write to file pointer
+		    $i = 0;
+		    foreach($output as $row){
+
+
+		        //$lineData = array($row->asignatura, $row->fecha, $row->anio, $row->semestre, $row->seccion, $row->alumno, $row->nota);
+		        fputcsv($f, $row, $delimiter);
+		        $i++;
+    		}	
+		}
+	    redirect(base_url('/files/alumnos.csv'));
+
+
+    }
+
+    function paraCSV_Cursos()
+    {
+
+        $data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+
+        if($data['perfilBD'] == 1){ //admin
+            $output = $this->modelo->cargarDatos();
+            $data['asignaturas'] = $output;
+
+        }
+        elseif($data['perfilBD'] == 2){ //docente
+            $data['correoBD'] = $this->session->userdata('correo');
+            $output = $this->modelo->cargarDatosDocente($data['correoBD']);
+            $data['asignaturas'] = $output;
+
+        }
+        elseif($data['perfilBD'] == 4){ //director escuela
+            $data['correoBD'] = $this->session->userdata('correo');
+            $output = $this->modelo->cargarDatos();
+            $data['asignaturas'] = $output;
+        }
+
+
+
+		if($output > 0)
+		{
+		    $delimiter = ",";
+		    $filename = "cursos.csv";
+		    $link = "<?=base_url()?>".'files/'.$filename;
+
+		    //create a file pointer
+		    $f = fopen('files/'.$filename, 'w');
+		    
+		    //set column headers
+		    $fields = array('Nombre', 'Seccion', 'Semestre', 'Anio');
+		    fputcsv($f, $fields, $delimiter);
+		    
+		    //output each row of the data, format line as csv and write to file pointer
+		    $i = 0;
+		    foreach($output as $row){
+
+
+		        //$lineData = array($row->asignatura, $row->fecha, $row->anio, $row->semestre, $row->seccion, $row->alumno, $row->nota);
+		        fputcsv($f, $row, $delimiter);
+		        $i++;
+    		}	
+		}
+	    redirect(base_url('/files/cursos.csv'));
     }
 
     function asignarProfesor()
@@ -223,6 +302,30 @@ class InstanciaAsignatura extends MY_Controller {
 
     	$this->modelo->guardarAlumno($matricula, $nombre, $correo, $refInstAsignatura);
     	redirect(base_url('index.php/instanciaAsignatura'));
+    }
+
+    function cargarAlumnos()
+    {
+
+    	$nombreArchivo = $this->input->post("");
+    	$root = 'files/';
+
+        $config['upload_path'] = $root;
+        $config['allowed_types'] = "*";
+        $config['max_size'] = "50000";
+        $config['max_width'] = "2000";
+        $config['max_height'] = "2000";
+        $config['remove_spaces'] = FALSE;
+
+        if(!file_exists($root))
+        {
+        	mkdir($root);
+        }
+
+
+    	$archivo = $this->input->post("form_data");
+    	echo("archivo: "+$archivo);
+    	$this->modelo->insertExcel($archivo);
     }
 
     function cargarArchivo()

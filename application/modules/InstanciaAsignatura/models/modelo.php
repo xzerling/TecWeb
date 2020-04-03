@@ -192,6 +192,14 @@ class modelo extends CI_Model{
 
 	}
 
+	function listarAlumnos($refAsignatura)
+	{
+		$query = "SELECT alumno.nombre, alumno.matricula, alumno.correo FROM `alumno`, `alumnoAsignatura` WHERE alumnoasignatura.refAlumno = alumno.matricula AND alumnoasignatura.refInstAsignatura = " .'"'.$refAsignatura.'"';
+		$output = $this->db->query($query)->result_array();
+		
+		return $output; 
+	}
+
 	public function insertExcel($archivo)
 	{
 		    

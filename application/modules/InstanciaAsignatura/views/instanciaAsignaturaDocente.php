@@ -74,6 +74,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div id="asignaturas">
 
+				<a href="<?php echo base_url('index.php/instanciaAsignatura/paraCSV_Cursos')?>" class="btn btn-success">
+          <span class="glyphicon glyphicon-plus"></span> Descargar Datos
+        </a>
 
 
 		<div id="filtrar" class="col-lg-3">
@@ -86,12 +89,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<button class="btn btn-secondary" onclick="filtrar()">Filtrar</button>
 			<br>
 		</div>
+
+
 			<br>
 		<table id="tabla" name="tabla" class="table table-striped">
 			<th>Nombre</th>
 			<th>Seccion</th>
 			<th>Semestre</th>
 			<th>Anio</th>
+			<th></th>
 			<th></th>
 			<th></th>
 			<th></th>
@@ -121,6 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
 					<td><button class="btn btn-success" onclick="cargarDatoss(<?=$i?>)">Agregar Archivo</button></td>
 					<td><a href="<?=base_url()?>index.php/instanciaAsignatura/verDatos?idInstancia=<?=$row['id']?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ver Archivos</a></td>
+					<td><a href="<?=base_url()?>index.php/instanciaAsignatura/paraCSV_Alumnos?idInstancia=<?=$row['id']?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Descargar Alumnos</a></td>
 				</tr>
 			<?$i++;endforeach;?>
 		</table>
