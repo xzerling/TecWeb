@@ -22,6 +22,23 @@ class modelo extends CI_Model{
 		return $resultado;
 	}
 
+	public function listarNotasDocente($correo)
+	{
+		$query = "SELECT CalificarEvaluacion.id, instanciaasignatura.id as idInstanciaAsignatura, asignatura.nombre AS asignatura, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, evaluacion.fecha, alumno.nombre, alumno.matricula, calificarevaluacion.nota 
+			FROM calificarevaluacion, alumno, alumnoasignatura, evaluacion, instanciaasignatura,profesorasignatura , asignatura
+			WHERE calificarevaluacion.refAlumno = alumnoasignatura.refAlumno
+			AND alumno.matricula = alumnoasignatura.refAlumno
+			AND evaluacion.id = calificarevaluacion.refEvaluacion
+			AND evaluacion.refInstAsignatura = instanciaasignatura.id
+			AND asignatura.id = instanciaasignatura.refAsignatura
+            AND profesorasignatura.refInstAsignatura = instanciaasignatura.id
+            AND profesorasignatura.refProfesor = '$correo'
+			AND asignatura.estado = '1' ";
+
+		$resultado = $this->db->query($query)->result();
+		return $resultado;
+	}
+
 	public function obtenerAsignaturas(){
 		$query = "select id, nombre from asignatura
 		 where estado = 1";
@@ -70,6 +87,16 @@ class modelo extends CI_Model{
 		
 		return $output; 
 	}
+
+	public function cargarDatosNuevoDocente($correo)
+	{
+		$query = "SELECT evaluacion.id, evaluacion.fecha, instanciaasignatura.id as idInstanciaAsignatura, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, asignatura.nombre FROM evaluacion, instanciaasignatura, asignatura, profesorasignatura WHERE evaluacion.refInstAsignatura = instanciaasignatura.id AND asignatura.id = instanciaasignatura.refAsignatura AND instanciaasignatura.id = profesorasignatura.refInstAsignatura AND profesorasignatura.refProfesor = '$correo' AND asignatura.estado = '1'  ";
+
+        $output = $this->db->query($query)->result_array();
+        return $output;
+	}
+
+
 
 	public function cargarDatosNuevo(){ 
 		$query = "SELECT evaluacion.id, evaluacion.fecha, instanciaasignatura.id as idInstanciaAsignatura, instanciaasignatura.seccion, instanciaasignatura.semestre, instanciaasignatura.anio, asignatura.nombre
