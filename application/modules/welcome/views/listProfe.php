@@ -178,5 +178,106 @@
 <br>
 
 
-</body>
-</html>
+
+
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "7f114f51-920e-4a37-b145-7866c7184c11",
+    });
+  });
+
+  OneSignal.push(function() {
+  /* These examples are all valid */
+  var isPushSupported = OneSignal.isPushNotificationsSupported();
+  if (isPushSupported) {
+    console.log("isPushSupported");
+
+    var titulo = "Bienvenido";
+    var contenido = "Bienvenido al sistema de Tec Web";
+    var url = "http://localhost/TecWeb/index.php/nota";
+    mensajePush(titulo, contenido, url);
+    //mensajePush(titulo2, contenido, url);
+  } else {
+    console.log("isNotPushSupported");
+  }
+});
+
+
+
+
+function mensajePush(titulo, contenido, url){
+var jsonBody = {
+  "app_id": "7f114f51-920e-4a37-b145-7866c7184c11",
+  "included_segments": ["All"],
+  "url" : url,
+  "headings": {
+                "en": titulo
+              },
+  "contents": {
+                "en": contenido
+              }
+  };
+  var request = $.ajax({
+      url: "https://onesignal.com/api/v1/notifications",
+      headers: {
+            'Authorization':'Basic NTFlYzllNzAtMWUwMy00YTc4LWI0MGYtNWMwNzlmM2IyN2Mz',
+            'Content-Type':'application/json'
+        },
+      type: "POST",
+      data: JSON.stringify(jsonBody),
+      dataType: "json"
+  });
+  console.log(request);
+
+    request.success(function(msg) {
+      console.log("success");
+    });
+
+    request.error(function(jqXHR, textStatus ) {
+      console.log( "Request failed: " + textStatus );
+
+    });
+
+
+}
+
+function mensajePushId(id, titulo, contenido, url){
+var jsonBody = {
+  "app_id": "7f114f51-920e-4a37-b145-7866c7184c11",
+  "included_segments": ["All"],
+  "url" : url,
+  "headings": {
+                "en": titulo
+              },
+  "contents": {
+                "en": contenido
+              }
+  };
+  var request = $.ajax({
+      url: "https://onesignal.com/api/v1/notifications",
+      headers: {
+            'Authorization':'Basic NTFlYzllNzAtMWUwMy00YTc4LWI0MGYtNWMwNzlmM2IyN2Mz',
+            'Content-Type':'application/json'
+        },
+      type: "POST",
+      data: JSON.stringify(jsonBody),
+      dataType: "json"
+  });
+  console.log(request);
+
+    request.success(function(msg) {
+      console.log("success");
+    });
+
+    request.error(function(jqXHR, textStatus ) {
+      console.log( "Request failed: " + textStatus );
+
+    });
+
+
+}
+
+</script>

@@ -11,6 +11,7 @@ class Welcome extends MY_Controller {
 	{
 			$data['nombre'] = $this->session->userdata('nombre');
 			$data['perfil'] = $this->session->userdata('perfil');
+			$data['correo'] = $this->session->userdata('correo');
 			$data['login'] = $this->session->userdata('login');
 
 		if ($this->session->userdata('login')){
@@ -22,6 +23,9 @@ class Welcome extends MY_Controller {
 			if ($this->session->userdata('perfil')== 2) {// Profesor 
 				//$this->Dashboard->index($data);
 				$this->load->view("header2", $data);
+
+				$data['evaluaciones'] = $this->modelo->listarEvaluaciones($data['correo']);
+
 				$this->load->view("dashboard", $data);
 				$this->load->view("fother");
 			}
@@ -41,6 +45,13 @@ class Welcome extends MY_Controller {
 				$this->load->view('listProfe');
 		}
 
+	}
+
+	public function obtenerEvaluaciones()
+	{
+		$resultados['resultados'] = $this->modelo->listarEvaluaciones();
+		$this->load->view('header');
+		$this->load->view('evaluacion', $resultados);
 	}
 
 	function loginf (){
