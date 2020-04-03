@@ -84,9 +84,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li class="nav-item ">
           <a class="nav-link" href="<?= base_url()?>index.php/">Inicio <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="<?= base_url()?>index.php/dashboard">Dashboard</a>
-		</li>
 		<li class="nav-item ">
            <a class="nav-link" href="<?=base_url()?>index.php/instanciaAsignatura">Asignatura</a>
         </li>
