@@ -17,7 +17,7 @@ class Welcome extends MY_Controller {
 		if ($this->session->userdata('login')){
 			if ($this->session->userdata('perfil')== 1) { // admin
 				$this->load->view("header2", $data);
-				$this->load->view("dashboard", $data);
+				$this->load->view("dashboardAdmin", $data);
 				$this->load->view("fother");
 			}
 			if ($this->session->userdata('perfil')== 2) {// Profesor 

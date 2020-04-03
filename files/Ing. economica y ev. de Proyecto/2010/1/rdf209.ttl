@@ -1,0 +1,14 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . 
+@prefix voc: <http://example.org/vocabularioTurismo/> .
+@prefix tmo: <http://www.owl-ontologies.com/travel.owl> .
+<http://example.org/RESIDENCIAL_SAN_SEBASTIAN_>
+	rdf:type voc:Alojamiento;
+	voc:comuna <http://dbpedia.org/resource/Curic\u00F3>;
+	voc:localidad "CURICO (P)";
+	voc:direccion "ESTADO 668, -";
+	voc:telefono "Dato Protegido";
+	voc:web "-";
+	voc:email "Dato Protegido";
+	voc:nombre "RESIDENCIAL SAN SEBASTIAN";
+	tmo:clase <http://www.owl-ontologies.com/travel.owl#Residencial>.

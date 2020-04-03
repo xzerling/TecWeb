@@ -98,25 +98,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<br>
 		</div>
 	
-		<table id="tabla" name="tabla" class="table table-striped">
-			<th>Nombre</th>
-			<th>Seccion</th>
-			<th>Semestre</th>
-			<th>Anio</th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<?$i=0;foreach($asignaturas as $row):?>
-				<tr class="trhideclass<?=$i?>">
-					<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
-						<input type="hidden" id="refAsignatura<?=$i?>" value="<?=$row['refAsignatura']?>" readonly>
-						<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
-						<p><?=$row['nombre']?></p>
-					</td>
-
-					<td><input type="hidden" id="seccion<?=$i?>" value="<?=$row['seccion']?>" readonly>
-						<p><?=$row['seccion']?></p>
-					</td>
 
     <table id="tabla" name="tabla" class="table table-striped">
 	<th>Nombre</th>
@@ -142,19 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
 						<p><?=$row['anio']?></p>
 					</td>
-					<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
-					<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
-				</tr>
-			<?$i++;endforeach;?>
-		</table>
 
-			<td><input type="hidden" id="semestre<?=$i?>" value="<?=$row['semestre']?>" readonly>
-				<p><?=$row['semestre']?></p>
-			</td>
-
-			<td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
-				<p><?=$row['anio']?></p>
-			</td>
 			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 			<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
 			<td><button class="btn btn-success" onclick="cargarDatos(<?=$i?>)">Agregar Archivo</button></td>
