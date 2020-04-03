@@ -195,9 +195,9 @@
   if (isPushSupported) {
     console.log("isPushSupported");
 
-    var titulo = "titulo"
-    var contenido = "contenido"
-    var url = "http://localhost/TecWeb/index.php/nota"
+    var titulo = "Bienvenido";
+    var contenido = "Bienvenido al sistema de Tec Web";
+    var url = "http://localhost/TecWeb/index.php/nota";
     mensajePush(titulo, contenido, url);
     //mensajePush(titulo2, contenido, url);
   } else {

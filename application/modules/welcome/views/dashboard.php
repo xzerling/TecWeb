@@ -1,8 +1,23 @@
+<div id="evaluaciones" name="evaluaciones">
+                          <? if(isset($evaluaciones)){ ?>
+                          <?$i=0;foreach($evaluaciones as $row):?>
+                          <div id="<?=$i?>">
+                            <input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly> 
+                            <input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly> 
+                            <input type="hidden" id="fecha<?=$i?>" value="<?=$row['fecha']?>" readonly> 
+                            <input type="hidden" id="dAntes<?=$i?>" value="<?=$row['diasAntes']?>" readonly> 
+                            <input type="hidden" id="dDespues<?=$i?>" value="<?=$row['diasDespues']?>" readonly> 
+                          </div>
+                          <?$i++;endforeach;?>
+                          <?}?>
+                        
+                        </div>
 <div id="logProfesor">
   <div class="container">
      <div class="card" id="asignatura">
                   <div class="face face1">
                       <div  class="content">
+                        <input type="hidden" id="correo" name="correo" value="<?=$correo?>" readonly>
                           <img src="https://image.flaticon.com/icons/svg/401/401708.svg">
                           <h3>Asignaturas</h3>
                       </div>
@@ -140,17 +155,142 @@
   if (isPushSupported) {
     console.log("isPushSupported");
 
-    var titulo = "titulo"
-    var contenido = "contenido"
-    var url = "http://localhost/TecWeb/index.php/nota"
-    mensajePush(titulo, contenido, url);
-    //mensajePush(titulo2, contenido, url);
+    var titulo = "Bienvenido";
+    var contenido = "Bienvenido al sistema de Tec Web";
+    var url = "http://localhost/TecWeb/index.php";
+
+    //mensajePush(titulo, contenido, url);
+
+    comprobarNotificaciones();
+    //mensajePushId(titulo2, contenido, url);
   } else {
     console.log("isNotPushSupported");
   }
 });
 
 
+function comprobarNotificaciones(){
+
+  var titulo = "Bienvenido";
+    var contenido = "Bienvenido al sistema de Tec Web";
+    var url = "http://localhost/TecWeb/index.php";
+
+    var correo = $("#correo").val();
+    
+    var evaluaciones = $("#evaluaciones");
+    var largo = evaluaciones.length;
+    console.log("largo: " + largo);
+
+    //diaActual
+    var d = new Date();
+    console.log("date: " + d);
+    var month = d.getMonth()+1;
+    var day = d.getDate();
+    var year = d.getFullYear();
+
+    //var fechaActual = new Date(year, month, day);
+    //console.log("fechaAct: " + fechaActual);
+
+    var fechaFinalActual = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+    
+    console.log("fechaFAC: " + fechaFinalActual);
+
+
+    for (var i = 0; i < largo; i++) {
+      var localId = $("#id"+i).val();
+      var localNombre = $("#nombre"+i).val();
+      var localFecha = $("#fecha"+i).val();
+      var localDAntes = $("#dAntes"+i).val();
+      var localDDespues = $("#dDespues"+i).val();
+      
+      var datee = new Date(localFecha);
+      console.log("localD: "+datee);
+
+      console.log(localId, localNombre, localFecha, localDAntes, localDDespues);
+
+      var flag = calculoNotificacion(d, datee, localDAntes, localDDespues, localNombre);
+      //hacerCalculo con estos y mostrarpush
+    }
+    //obtenerEvaluaciones(correo);
+}
+
+function calculoNotificacion(fechaFinalActual, localFecha, localDAntes, localDDespues, localNombre){
+
+  const diffTime = Math.abs(localFecha - fechaFinalActual);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+  console.log("diff: "+diffDays);
+
+  if(fechaFinalActual > localFecha){
+     console.log("mayor");
+     if(diffDays >= localDDespues){
+      console.log("evaluar");
+      var titulo = "Recordatorio Calificar Evaluacion";
+      var contenido = localNombre +" esta pendiente de evaluación";
+      var url = "http://localhost/TecWeb/index.php/nota";
+
+      mensajePush(titulo, contenido, url);
+    }
+  }else{
+     console.log("menor");
+    if(diffDays <= localDAntes){
+      console.log("recordatorio evaluacion");
+      var titulo = "Recordatorio Evaluacion";
+      var contenido = "Asignatura: "+localNombre +" tiene pronta evaluación";
+      var url = "http://localhost/TecWeb/index.php/evaluacion";
+
+      mensajePush(titulo, contenido, url);
+    }
+  }
+
+  /*if(diffDays >= 0){
+    console.log("evaluar");
+    var titulo = "Recordatorio Calificar Evaluacion";
+    var contenido = localNombre +" esta pendiente de evaluación";
+    var url = "http://localhost/TecWeb/index.php/nota";
+
+    mensajePush(titulo, contenido, url);
+  }
+  else if(diffDays <= 0){
+    console.log("recordatorio evaluacion");
+    var titulo = "Recordatorio Evaluacion";
+    var contenido = "Asignatura: "+localNombre +" tiene pronta evaluación";
+    var url = "http://localhost/TecWeb/index.php/evaluacion";
+
+    mensajePush(titulo, contenido, url);
+  }*/
+  if(isNaN(diffDays)){
+    console.log("null");
+
+    var titulo = "Bienvenido";
+    var contenido = "Usted no posee recordatorios";
+    var url = "http://localhost/TecWeb/index.php";
+
+    mensajePush(titulo, contenido, url);
+  }
+
+}
+
+function obtenerEvaluaciones(correo){
+    var base_url = "<? echo base_url()?>";
+    console.log("obtenerAlumnos");
+    console.log(id);
+    $.post(
+      base_url+"index.php/nota/obtenerEvaluaciones",
+      {correo:correo},
+      function(url, data){
+        //var html = $.parseHTML(data);
+        //alert(url);
+        var x = document.createElement('div');
+          x.innerHTML = url;
+
+        var nuevosAlumnos = x.querySelector('#listado').innerHTML;
+        document.querySelector('#listado').innerHTML = nuevosAlumnos;
+        
+      }
+    )
+  }
 
 
 function mensajePush(titulo, contenido, url){

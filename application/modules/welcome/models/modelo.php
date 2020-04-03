@@ -111,5 +111,16 @@ class modelo extends CI_Model{
 
 	}
 
+	public function listarEvaluaciones($correo){
+		$query = "select evaluacion.id,evaluacion.fecha, evaluacion.diasAntes, evaluacion.diasDespues, asignatura.nombre, instanciaasignatura.anio,instanciaasignatura.semestre, instanciaasignatura.seccion, evaluacion.refInstAsignatura, profesorasignatura.refProfesor
+			 from evaluacion, instanciaasignatura, asignatura, profesorasignatura
+			where evaluacion.refInstAsignatura = instanciaasignatura.id and instanciaasignatura.refAsignatura = asignatura.id
+			AND profesorasignatura.refInstAsignatura = instanciaasignatura.id
+			AND profesorasignatura.refProfesor = '$correo' " ;
+
+		$resultado = $this->db->query($query)->result_array();
+		return $resultado;
+	}
+
 }
 ?>
