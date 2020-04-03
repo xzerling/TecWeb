@@ -25,17 +25,47 @@ class Nota extends MY_Controller {
 	}
 	public function index()
 	{
-		$resultados['resultados'] = $this->modelo->listarNotas();
-		$this->load->view('header');
-		$this->load->view('nota', $resultados);
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD'] == 1)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$resultados['resultados'] = $this->modelo->listarNotas();
+			$this->load->view('header',$data);
+			$this->load->view('nota', $resultados);
+        }
+        elseif($data['perfilBD'] == 2)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$resultados['resultados'] = $this->modelo->listarNotasDocente($data['correoBD']);
+        	$this->load->view('header', $data);
+        	$this->load->view('nota', $resultados);
+        }
 	}
 
 	    function crear()
 	{
-		$data['asignaturas'] = $this->modelo->cargarDatosNuevo();
-		$data['alumnos'] = $this->modelo->cargarAlumnosNuevo(1);
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD'] == 1)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
 
-		$this->load->view('crear', $data);
+			$data['asignaturas'] = $this->modelo->cargarDatosNuevo();
+			$data['alumnos'] = $this->modelo->cargarAlumnosNuevo(1);
+
+			$this->load->view('crear', $data);
+        }
+        elseif($data['perfilBD']==2)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+
+			$data['asignaturas'] = $this->modelo->cargarDatosNuevoDocente($data['correoBD']);
+			$data['alumnos'] = $this->modelo->cargarAlumnosNuevo(1);
+
+			$this->load->view('crear',$data);
+        }
+
 	}
 
 	function paraCSV()

@@ -28,10 +28,25 @@ class Desempeno extends MY_Controller {
     }
 	public function index()
 	{
-		$output = $this->modelo->cargarDatos();
 
-		$data['calificaciones'] = $output;
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
 		$this->load->view('header');
-		$this->load->view('desempeno', $data);
+		
+		if($data['perfilBD']==1)
+		{
+			$output = $this->modelo->cargarDatos();
+
+			$data['calificaciones'] = $output;
+			$this->load->view('desempeno', $data);
+		}
+		elseif($data['perfilBD']==2)
+		{
+			$data['correoBD'] = $this->session->userdata('correo');
+			$output = $this->modelo->cargarDatosDocente($data['correoBD']);
+			$data['calificaciones'] = $output;
+			$this->load->view('desempeno',$data);
+		}
+
 	}
 }

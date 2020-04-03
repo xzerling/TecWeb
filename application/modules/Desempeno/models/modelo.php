@@ -70,7 +70,7 @@ class modelo extends CI_Model{
 		from calificarevaluacion, instanciaasignatura, asignatura, evaluacion, alumno
 		where asignatura.id = instanciaasignatura.refAsignatura and 
 		evaluacion.id = calificarevaluacion.refEvaluacion and
-		asignatura.id = evaluacion.refInstAsignatura and
+		instanciaasignatura.id = evaluacion.refInstAsignatura and
 		alumno.matricula = calificarevaluacion.refAlumno
         ORDER BY(alumno.nombre)";
 
@@ -78,6 +78,16 @@ class modelo extends CI_Model{
 
 		return $output;
 	}
+
+	function cargarDatosDocente($correo)
+	{
+		$this->load->helper('url');
+		$query = " select instanciaasignatura.id, asignatura.nombre as nombreAsignatura, instanciaasignatura.refAsignatura, instanciaasignatura.anio, alumno.nombre, calificarevaluacion.refAlumno, calificarevaluacion.nota from calificarevaluacion, instanciaasignatura, asignatura, evaluacion, alumno, profesorasignatura where asignatura.id = instanciaasignatura.refAsignatura and evaluacion.id = calificarevaluacion.refEvaluacion and instanciaasignatura.id = evaluacion.refInstAsignatura and alumno.matricula = calificarevaluacion.refAlumno AND profesorasignatura.refInstAsignatura = instanciaasignatura.id and profesorasignatura.refProfesor = '$correo' ORDER BY(alumno.nombre) ";
+
+		$output = $this->db->query($query)->result_array();
+		return $output;
+	}
+
 	function eliminarDato($id){
 		$this->db->where("id",$id);
 		$this->db->delete('asignatura');
