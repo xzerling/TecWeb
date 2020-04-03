@@ -43,7 +43,17 @@ class InstanciaAsignatura extends MY_Controller {
 		$data['asignaturas'] = $this->modelo->obtenerAsignaturas();
 		$data['nombreBD'] = $this->session->userdata('nombre');
         $data['perfilBD'] = $this->session->userdata('perfil');
-        $this->load->view('header2', $data);
+        if($data['perfilBD']==1)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header2', $data);
+        }
+        elseif($data['perfilBD']==4)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header3', $data);
+        }
+
 		$this->load->view('crear', $data);
 	}
 
@@ -54,7 +64,16 @@ class InstanciaAsignatura extends MY_Controller {
 		$data['asignaturas'] = $output;
         $data['nombreBD'] = $this->session->userdata('nombre');
         $data['perfilBD'] = $this->session->userdata('perfil');
-        $this->load->view('header2', $data);
+        if($data['perfilBD']==1)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header2', $data);
+        }
+        elseif($data['perfilBD']==4)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header3', $data);
+        }
 		$this->load->view('instanciaAsignatura', $data);
 	}
 
@@ -78,19 +97,28 @@ class InstanciaAsignatura extends MY_Controller {
 
         $data['nombreBD'] = $this->session->userdata('nombre');
         $data['perfilBD'] = $this->session->userdata('perfil');
-        $this->load->view('header2', $data);
 
         if($data['perfilBD'] == 1){ //admin
             $output = $this->modelo->cargarDatos();
             $data['asignaturas'] = $output;
 
+          $this->load->view('header2', $data);
 		  $this->load->view('instanciaAsignatura', $data);
         }
         elseif($data['perfilBD'] == 2){ //docente
             $data['correoBD'] = $this->session->userdata('correo');
             $output = $this->modelo->cargarDatosDocente($data['correoBD']);
             $data['asignaturas'] = $output;
+
+            $this->load->view('header2', $data);            
             $this->load->view('instanciaAsignaturaDocente', $data);
+        }
+        elseif($data['perfilBD'] == 4){ //director escuela
+            $data['correoBD'] = $this->session->userdata('correo');
+            $output = $this->modelo->cargarDatos();
+            $data['asignaturas'] = $output;
+            $this->load->view('header3', $data);
+            $this->load->view('instanciaAsignatura', $data);
         }
 	}
 
@@ -111,7 +139,16 @@ class InstanciaAsignatura extends MY_Controller {
 
 		$data['nombreBD'] = $this->session->userdata('nombre');
         $data['perfilBD'] = $this->session->userdata('perfil');
-        $this->load->view('header2', $data);
+        if($data['perfilBD']==1)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header2', $data);
+        }
+        elseif($data['perfilBD']==4)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header3', $data);
+        }
     	$this->load->view('asignarProfesor', $data);
     }
 
@@ -127,7 +164,16 @@ class InstanciaAsignatura extends MY_Controller {
 		$data['asignaturas'] = $asignaturas;
 		$data['nombreBD'] = $this->session->userdata('nombre');
         $data['perfilBD'] = $this->session->userdata('perfil');
-        $this->load->view('header2', $data);
+        if($data['perfilBD']==1)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header2', $data);
+        }
+        elseif($data['perfilBD']==4)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header3', $data);
+        }
     	$this->load->view('asignaturasAsignadas',$data);
     }
 
@@ -141,7 +187,13 @@ class InstanciaAsignatura extends MY_Controller {
     {
     	$asignaturas = $this->modelo->obtenerTodasAsignaturas();
     	$data['asignaturas'] = $asignaturas;
-
+        $data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD']==4)
+        {
+            $data['correoBD'] = $this->session->userdata('correo');
+            $this->load->view('header3', $data);
+        }
     	$this->load->view('crearAlumno',$data);
     }
 

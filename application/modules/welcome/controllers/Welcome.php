@@ -30,6 +30,11 @@ class Welcome extends MY_Controller {
 				$this->load->view("dashboard", $data);
 				$this->load->view("fother");
 			}
+			if($this->session->userdata('perfil')== 4){
+				$this->load->view("header3",$data);
+				$this->load->view("dashboardescuela", $data);
+				$this->load->view("fother");
+			}
 		}else{
 				$this->load->view('header');
 				$this->load->view('login');

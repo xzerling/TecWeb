@@ -10,7 +10,7 @@ class modelo extends CI_Model{
   		$query1= "SELECT * FROM administrador WHERE administrador.correo =" . '"'.$correo.'"' . "AND administrador.clave =" . '"'.$clave.'"';
 	  	$query2= "SELECT * FROM profesor WHERE profesor.correo =" . '"'.$correo.'"'. "AND profesor.clave =" . '"'.$clave.'"';
 	  	$query3= "SELECT * FROM ayudante WHERE ayudante.correo =" . '"'.$correo.'"'. "AND ayudante.clave =" . '"'.$clave.'"';
-
+	  	$query4 = "SELECT * FROM directorescuela WHERE directorescuela.correo =" . '"'.$correo.'"'. "AND directorescuela.clave =" . '"'.$clave.'"';
 	  	$resultado = $this->db->query($query1)->result();
 	  	if(count($resultado) != 0)
 	  	{
@@ -25,6 +25,11 @@ class modelo extends CI_Model{
 
 	  	$resultado = $this->db->query($query3)->result();
 	  	if(count($resultado) != 0)
+	  	{
+	  		return true;
+	  	}
+	  	$resultado = $this->db->query($query4)->result();
+	  	if(count($resultado)!= 0)
 	  	{
 	  		return true;
 	  	}
@@ -55,6 +60,12 @@ class modelo extends CI_Model{
 				return $correo->nombre;
 			}
 		}
+		if($perfil==4){
+			$result = $this->db->get('directorescuela')->result();
+			foreach($result as $correo){
+				return $correo->nombre;
+			}
+		}
 		else{
 				return 0;
 		}
@@ -68,6 +79,7 @@ class modelo extends CI_Model{
   		$query1= "SELECT * FROM administrador WHERE administrador.correo =" . '"'.$correo.'"';
 	  	$query2= "SELECT * FROM profesor WHERE profesor.correo =" . '"'.$correo.'"';
 	  	$query3= "SELECT * FROM ayudante WHERE ayudante.correo =" . '"'.$correo.'"';
+	  	$query4= "SELECT * FROM directorescuela WHERE directorescuela.correo =" . '"'.$correo.'"';
 	  	$resultado = $this->db->query($query1)->result();
 	  	if(count($resultado) != 0)
 	  	{
@@ -84,6 +96,10 @@ class modelo extends CI_Model{
 	  	if(count($resultado) != 0)
 	  	{
 	  		return 3;
+	  	}
+	  	$resultado = $this->db->query($query4)->result();
+	  	if(count($resultado) != 0){
+	  		return 4;
 	  	}
 	  	else
 	  	{

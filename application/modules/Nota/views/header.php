@@ -5,14 +5,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>Bienvenido</title>
-<link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCdu7rmFivHO96-lkavgW2G93YH_hGBGKkIKjJ0iMLiphyeO1n" style="border-radius: 50%;">
+	<link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCdu7rmFivHO96-lkavgW2G93YH_hGBGKkIKjJ0iMLiphyeO1n" style="border-radius: 50%;">
 
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?= base_url()?>/css/hoja1.css">
 	<script type="text/javascript" src="<?= base_url()?>/js/inicio.js"></script>
+
 	<style type="text/css">
+
+	a {
+		color: #003399;
+		background-color: transparent;
+		font-weight: normal;
+	}
 
 	h1 {
 		color: #444;
@@ -55,8 +62,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 	</style>
 
-
-
 </head>
 <body>
 
@@ -70,25 +75,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Profesor</a>
+      <a class="navbar-brand" href="#"> Profesor </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-	 	 <li class="nav-item ">
+        <li class="nav-item ">
           <a class="nav-link" href="<?= base_url()?>index.php/">Inicio <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="<?= base_url()?>index.php/dashboard">Dashboard</a>
-				</li>
-				<li class="nav-item">
+		</li>
+		<li class="nav-item ">
            <a class="nav-link" href="<?=base_url()?>index.php/instanciaAsignatura">Asignatura</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ">
         	<a class="nav-link" href="<?=base_url()?>index.php/evaluacion">Evaluacion</a>
         </li>
-    		<li class="nav-item active">
+    		<li class="nav-item ">
           <a class="nav-link" href="<?=base_url()?>index.php/nota">Notas</a>
         </li>
         <li class="nav-item ">
@@ -101,9 +106,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <a class="nav-link" href="<?=base_url()?>index.php/notificacion">Notificacion</a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="<?= base_url()?>Welcome/loginf">Cerrar sesion</a>
+          <a class="nav-link" href="<?php echo base_url('index.php/Welcome/salir');?>">Cerrar sesion</a>
          </li>			
-			</ul>
+	</ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
