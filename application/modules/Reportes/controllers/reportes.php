@@ -11,49 +11,95 @@ class reportes extends MY_Controller
 
 	public function index()
 	{
-		$this->load->view('reportes');
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD'] == 4)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+
+        	$this->load->view('header3', $data);
+        	$this->load->view('reportes');
+        }		
 	}
 
 	public function profesoresAlDia()
 	{
-		$profesores = $this->modelo->profesoresAlDia();
-		$data['profesores'] = $profesores;
-
-		$this->load->view('reportes');
-		$this->load->view('profesAlDia', $data);
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD'] == 4)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+        	$this->load->view('header3', $data);
+        	$profesores = $this->modelo->profesoresAlDia();
+			$data['profesores'] = $profesores;
+			$this->load->view('reportes');
+			$this->load->view('profesAlDia', $data);	
+        }		
 	}
 
 	public function profesoresAtrasados()
 	{
-		$profesores = $this->modelo->profesoresAtrasados();
-		$data['profesores'] = $profesores;
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+		if($data['perfilBD']== 4)
+		{
+			$profesores = $this->modelo->profesoresAtrasados();
+		
+			$data['correoBD'] = $this->session->userdata('correo');
+	        $this->load->view('header3', $data);
+			$data['profesores'] = $profesores;
 
-		$this->load->view('reportes');
-		$this->load->view('profesAtrasados', $data);
+			$this->load->view('reportes');
+			$this->load->view('profesAtrasados', $data);
+		}
 	}
 
 	public function cantidadAlumnos()
 	{
-		$this->load->view('reportes');
-		$this->load->view('cantidadAlumnos');
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+		if($data['perfilBD']== 4)
+		{
+			$data['correoBD'] = $this->session->userdata('correo');
+	        $this->load->view('header3', $data);
+			$this->load->view('reportes');
+			$this->load->view('cantidadAlumnos');
+		}	
 	}
 
 	public function cursos(){		
-		$cursos = $this->modelo->cursosConCantidad();
+		
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
 
-		$data['cursos'] = $cursos;
-		$this->load->view('reportes');
-		$this->load->view('cursos', $data);
+		if($data['perfilBD']== 4)
+		{
+			$data['correoBD'] = $this->session->userdata('correo');
+	        $this->load->view('header3', $data);			
+			$cursos = $this->modelo->cursosConCantidad();
+			$data['cursos'] = $cursos;
+			$this->load->view('reportes');
+			$this->load->view('cursos', $data);
+		}
 	}
 
 	public function promediosCursos()
-	{
-		$promedios = $this->modelo->obtenerPromedios();
+	{	
 
-		$data['promedios'] = $promedios;
+		$data['nombreBD'] = $this->session->userdata('nombre');
+        $data['perfilBD'] = $this->session->userdata('perfil');
+        if($data['perfilBD']== 4)
+        {
+        	$data['correoBD'] = $this->session->userdata('correo');
+	        $this->load->view('header3', $data);	
 
-		$this->load->view('reportes');
-		$this->load->view('promediosCursos', $data);
+        	$promedios = $this->modelo->obtenerPromedios();
+
+			$data['promedios'] = $promedios;
+
+			$this->load->view('reportes');
+			$this->load->view('promediosCursos', $data);
+        }		
 	}
 }
 

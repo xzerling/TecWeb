@@ -12,8 +12,8 @@ class Administracion extends MY_Controller
 
 	public function index()
 	{
+		$this->load->view('header');
 		$data['profesores'] = $this->modelo->obtenerProfesores();
-
 		$this->load->view('administracion', $data); 
 	}
 

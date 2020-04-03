@@ -78,24 +78,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<div id="asignaturas">
 
-	<button class="btn btn-secondary" onclick="CargarExcel()">Cargar Alumnos</button>
+		<button class="btn btn-secondary" onclick="CargarExcel()">Cargar Alumnos</button>
 
-	<a href="<?=base_url()?>index.php/instanciaAsignatura/crear" class="btn btn-success">
-          <span class="glyphicon glyphicon-plus"></span> Agregar Asignatura
-        </a>
-	<form method="post" action="<?=base_url()?>index.php/asignatura">
-		<button class="btn btn-warning" type="submit">BD Asignaturas</button>
-	</form>
+		<a href="<?=base_url()?>index.php/instanciaAsignatura/crear" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span> Agregar Asignatura
+			</a>
+		<form method="post" action="<?=base_url()?>index.php/asignatura">
+			<button class="btn btn-warning" type="submit">BD Asignaturas</button>
+		</form>
+		<br>
+		<div id="filtrar" class="col-lg-3">
+			<input type="text" class ="form-control" id="searchFilter" placeholder="Buscar">
+			<select id="atributoFilter" class="form-control">
+							<option value="1">Nombre</option>
+							<option value="2">Semestre</option>
+							<option value="3">Año</option>
+						</select>
+			<button class="btn btn-secondary" onclick="filtrar()">Filtrar</button>
+			<br>
+		</div>
+	
+		<table id="tabla" name="tabla" class="table table-striped">
+			<th>Nombre</th>
+			<th>Seccion</th>
+			<th>Semestre</th>
+			<th>Anio</th>
+			<th></th>
+			<th></th>
+			<th></th>
+			<?$i=0;foreach($asignaturas as $row):?>
+				<tr class="trhideclass<?=$i?>">
+					<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
+						<input type="hidden" id="refAsignatura<?=$i?>" value="<?=$row['refAsignatura']?>" readonly>
+						<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
+						<p><?=$row['nombre']?></p>
+					</td>
 
-	<div id="filtrar" class="col-lg-3">
-		<input type="text" class ="form-control" id="searchFilter">
-		<select id="atributoFilter" class="form-control">
-						<option value="1">Nombre</option>
-						<option value="2">Semestre</option>
-						<option value="3">Año</option>
-					</select>
-		<button class="btn btn-secondary" onclick="filtrar()">Filtrar</button>
-	</div>
+					<td><input type="hidden" id="seccion<?=$i?>" value="<?=$row['seccion']?>" readonly>
+						<p><?=$row['seccion']?></p>
+					</td>
 
     <table id="tabla" name="tabla" class="table table-striped">
 	<th>Nombre</th>
@@ -114,10 +135,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
 				<p><?=$row['nombre']?></p>
 			</td>
+					<td><input type="hidden" id="semestre<?=$i?>" value="<?=$row['semestre']?>" readonly>
+						<p><?=$row['semestre']?></p>
+					</td>
 
-			<td><input type="hidden" id="seccion<?=$i?>" value="<?=$row['seccion']?>" readonly>
-				<p><?=$row['seccion']?></p>
-			</td>
+					<td><input type="hidden" id="anio<?=$i?>" value="<?=$row['anio']?>" readonly>
+						<p><?=$row['anio']?></p>
+					</td>
+					<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
+					<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
+				</tr>
+			<?$i++;endforeach;?>
+		</table>
 
 			<td><input type="hidden" id="semestre<?=$i?>" value="<?=$row['semestre']?>" readonly>
 				<p><?=$row['semestre']?></p>

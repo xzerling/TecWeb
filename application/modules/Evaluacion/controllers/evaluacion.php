@@ -26,14 +26,14 @@ class Evaluacion extends MY_Controller {
 	public function index()
 	{
 		$resultados['resultados'] = $this->modelo->listarEvaluaciones();
-
+		$this->load->view('header');
 		$this->load->view('evaluacion', $resultados);
 	}
 
 	public function crear()
 	{
 		$data['resultados'] = $this->modelo->obtenerAsignaturas();
-
+		$this->load->view('header');
 		$this->load->view('crear', $data);
 	}
 
@@ -64,7 +64,7 @@ class Evaluacion extends MY_Controller {
 		$data['evaluadas'] = $this->modelo->obtenerEvaluadas();
 		$data['pendientes'] = $this->modelo->obtenerPendientes();
 		$data['atrasadas'] = $this->modelo->obtenerAtrasadas();
-
+		$this->load->view('header');
 		$this->load->view('monitoreo',$data);
 	}
 

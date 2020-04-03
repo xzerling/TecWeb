@@ -10,14 +10,14 @@ class Observacion extends MY_Controller{
 
 	public function index(){
 		$data['resultados'] = $this->modelo->listarObservaciones();
-
+		$this->load->view('header');
 		$this->load->view('observacion', $data);
 	}
 
 	public function crear(){
 		$data['profesores'] = $this->modelo->obtenerProfesores();
 		$data['alumnos'] = $this->modelo->obtenerAlumnos();
-
+		$this->load->view('header');
 		$this->load->view('crear',$data);
 	}
 
