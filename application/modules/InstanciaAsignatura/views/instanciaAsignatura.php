@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
       	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
@@ -105,6 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<th></th>
 	<th></th>
 	<th></th>
+	<th></th>
 	<?$i=0;foreach($asignaturas as $row):?>
 		<tr class="trhideclass<?=$i?>">
 			<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
@@ -128,6 +129,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><button class="btn btn-secondary" onclick="editar(<?=$i?>)">Editar</button></td>
 			<td><button class="btn btn-danger" onclick="eliminar(<?=$i?>)">Eliminar</button></td>
 			<td><button class="btn btn-success" onclick="cargarDatos(<?=$i?>)">Agregar Archivo</button></td>
+			<td><a href="<?=base_url()?>index.php/instanciaAsignatura/verDatos?idInstancia=<?=$row['id']?>" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ver Archivos</a></td>
+			
+
 		</tr>
 	<?$i++;endforeach;?>
 	</table>
@@ -240,71 +244,144 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="modal-header">
   				<h3 class="mt-5">Agregar Archivos al Curso</h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          			<span aria-hidden="true">&times;</span>
+      			<span aria-hidden="true">&times;</span>
         		</button>
 			</div>
+
 			<div class="modal-body">
 
-			<form class="form-group"  method="post" name="cargarArchivo" id="cargarArchivo" enctype="multipart/form-data">
+				<form class="form-group"  method="post" name="cargarArchivo" id="cargarArchivo" enctype="multipart/form-data">
 
-            <div>
+					<div class="form-group">
+						<label for="nombreA" class="col-lg-2 control-label">Nombre</label>
+						<input type="hidden" id="idA">
+						<input type="hidden" id="refAsignaturaA">
+						<div class="col-lg-10">
+							<input type="text" class ="form-control" id="nombreA" disabled="disabled">
+						</div>
+					</div>
 
-				<div class="form-group">
-				<label for="nombreA" class="col-lg-2 control-label">Nombre</label>
-				<input type="hidden" id="idA">
-				<input type="hidden" id="refAsignaturaA">
-				<div class="col-lg-10">
-					<input type="text" class ="form-control" id="nombreA" disabled="disabled">
-				</div>
-			</div>
+					<div class="form-group">
+						<label for="seccionEdit" class="col-lg-2 control-label">Seccion</label>
+						<div class="col-lg-10">
+							<input type="text" class ="form-control" id="seccionA" disabled="disabled">
+						</div>
+					</div>
 
-			<div class="form-group">
-				<label for="seccionEdit" class="col-lg-2 control-label">Seccion</label>
-				<div class="col-lg-10">
-					<input type="text" class ="form-control" id="seccionA" disabled="disabled">
-				</div>
-			</div>
+					<div class="form-group">
+						<label for="semestreA" class="col-lg-2 control-label">Semestre</label>
+						<div class="col-lg-10">
+						<select id="semestreA" class="form-control" disabled="disabled">
+								<option value="1">Otoño</option>
+								<option value="2">Primavera</option>
+								<option value="3">Verano</option>
+								<option value="4">Invierno</option>
+							</select>
+						</div>
+					</div>
 
-			<div class="form-group">
-				<label for="semestreA" class="col-lg-2 control-label">Semestre</label>
-				<div class="col-lg-10">
-				<select id="semestreA" class="form-control" disabled="disabled">
-						<option value="1">Otoño</option>
-						<option value="2">Primavera</option>
-						<option value="3">Verano</option>
-						<option value="4">Invierno</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="anioA" class="col-lg-2 control-label">Año</label>
-				<div class="col-lg-10">
-					<input type="text" class ="form-control" id="anioA" disabled="disabled">
-				</div>
-			</div>
-			
-	        
-
-	                <label for="archivo" class="col-sm2 control-label">Elegir archivo</label>
-	              
+					<div class="form-group">
+						<label for="anioA" class="col-lg-2 control-label">Año</label>
+						<div class="col-lg-10">
+							<input type="text" class ="form-control" id="anioA" disabled="disabled">
+						</div>
+					</div>
+				
+		            <label for="archivo" class="col-sm2 control-label">Elegir archivo</label>
+		          
 					<div class="col-lg-10">
 						<input type="file" id="archivoCurso" name="archivoCurso" accept="">
 						<input type="hidden" id="idA" name = idA>
 					</div>
-		
 
+					<div class="modal-footer">
+					<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+	                <button type="submit" id="submit" value = "Submit"  name="import" class="btn btn-success" onclick="upload_file()">Cargar Archivo</button>
+					</div>
 
-	            </div>
-
-				<div class="modal-footer">
-				<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
-                <button  id="submit" value = "Submit"  name="import" class="btn btn-success" onclick="upload_file()">Cargar Archivo</button>
-				</div>
-			</form> 
+				</form> 
+			</div>
 		</div>
 	</div>
-	
+</div>
+
+<div id="myModal4" style="display: none;" class="modal" role="dialog">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+  				<h3 class="mt-5">Archivos cargados</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      			<span aria-hidden="true">&times;</span>
+        		</button>
+			</div>
+			
+			<div class="modal-body">
+
+				<form class="form-group"  method="post" name="cargarArchivo" id="cargarArchivo" enctype="multipart/form-data">
+
+					<div class="form-group">
+						<input type="hidden" id="idA">
+						<input type="hidden" id="refAsignaturaV">
+						<input type="hidden" class ="form-control" id="nombreV" disabled="disabled">
+
+					</div>
+
+					<div class="form-group">
+
+							<input type="hidden" class ="form-control" id="seccionV" disabled="disabled">
+
+
+					<div class="form-group">
+						<label for="semestreV" class="col-lg-2 control-label">Semestre</label>
+						<div class="col-lg-10">
+						<select id="semestreV" class="form-control" disabled="disabled">
+								<option value="1">Otoño</option>
+								<option value="2">Primavera</option>
+								<option value="3">Verano</option>
+								<option value="4">Invierno</option>
+							</select>
+						</div>
+					</div>
+
+
+					<label for="anioA" class="col-lg-2 control-label">Año</label>
+						<div class="col-lg-10">
+							<input type="text" class ="form-control" id="anioV" disabled="disabled">
+						</div>
+
+			    <table id="tabla" name="tabla" class="table table-striped">
+				<th>Nombre</th>
+				<th>Directorio</th>
+
+				<th></th>
+
+				<?$i=0;foreach($asignaturas as $row):?>
+					<tr class="trhideclass<?=$i?>">
+						<td><input type="hidden" id="id<?=$i?>" value="<?=$row['id']?>" readonly>
+							<input type="hidden" id="refAsignatura<?=$i?>" value="<?=$row['refAsignatura']?>" readonly>
+							<input type="hidden" id="nombre<?=$i?>" value="<?=$row['nombre']?>" readonly>
+							<p><?=$row['nombre']?></p>
+						</td>
+
+						<td><input type="hidden" id="seccion<?=$i?>" value="<?=$row['seccion']?>" readonly>
+							<p><?=$row['seccion']?></p>
+						</td>
+						
+						<td><button class="btn btn-primary" onclick="mostrarDatos(<?=$i?>)">Descargar</button></td>
+
+					</tr>
+				<?$i++;endforeach;?>
+				</table>
+
+
+					<div class="modal-footer">
+					<button class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+					</div>
+
+				</form> 
+			</div>
+		</div>
+	</div>
 </div>
 	
 
@@ -359,6 +436,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				});
 				
 			}
+
+
 </script>
 
 <script type="text/javascript">
@@ -449,16 +528,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$("#myModal1").modal('show');
 	}
 
-	function cargarDatos(){
-		var base_url = "<? echo base_url()?>";
-		$.post(
-			base_url+"index.php/instanciaAsignatura/cargarDatos",
-			{},
-			function(url,data){
-				$("#listado").html(url,data);
-			}
-		);
-	}
 
 		function guardarCambios() {
 		var id 		= $("#idEdit").val();
@@ -509,6 +578,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//$("#idEdit").val($("#id"+indice).val());
 
 		$("#myModal2").modal('show');
+	}
+
+	function mostrarDatos(indice)
+	{
+		var base_url = "<? echo base_url()?>";
+		console.log("mostrando modal 4")
+		console.log("indice: " + indice)
+		console.log($("#id"+indice).val());
+		$("#idV").val($("#id"+indice).val());
+		console.log("idV: "+$("#idV").val());
+		$("#refAsignaturaV").val($("#refAsignatura"+indice).val());
+
+		$("#nombreV").val($("#nombre"+indice).val());
+
+		$("#seccionV").val($("#seccion"+indice).val());
+		$("#semestreV").val($("#semestre"+indice).val());
+		$("#anioV").val($("#anio"+indice).val());
+
+		$("#myModal4").modal('show');
 	}
 
 	function cargarDatos(indice){

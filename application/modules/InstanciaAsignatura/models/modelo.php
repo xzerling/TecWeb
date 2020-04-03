@@ -73,7 +73,16 @@ class modelo extends CI_Model{
 		$output = $this->db->query($query)->result_array();
 		
 		return $output; 
-	} 
+	}
+
+    public function cargarArchivos($id){ 
+		$query = "SELECT * FROM `documentos` WHERE refAsignatura =".'"'.$id.'"';
+
+ 
+		$output = $this->db->query($query)->result_array();
+		
+		return $output; 
+	}  
 
 	public function obtenerAsignaturas(){
 		$query = "select id, nombre from asignatura

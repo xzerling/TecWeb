@@ -85,6 +85,23 @@ class InstanciaAsignatura extends MY_Controller {
 		$this->load->view('instanciaAsignatura', $data);
 	}
 
+	function verDatos()
+	{
+		/*$crud = new grocery_CRUD();
+ 
+        $crud->set_table('asignatura');
+        $crud->columns('id','nombre','estado');
+        $output = $crud->render();*/
+
+        $id = $this->input->get("idInstancia");
+        $output = $this->modelo->cargarArchivos($id);
+
+		$data['tabla'] = $output;
+        
+		$this->load->view('verDatos', $data);
+
+	}
+
     function cargarAlumnos()
     {
     	$archivo = $this->input->post("form_data");
@@ -103,7 +120,8 @@ class InstanciaAsignatura extends MY_Controller {
     	$mi_archivo = 'archivoCurso';
     	//$mi_archivo = $this->input->post('file');
 
-    	$ruta = 'files/'.$nombreCurso.'/';
+    	$root = 'files/';
+    	$ruta = $root.$nombreCurso.'/';
     	$ruta2 = $ruta.$anio.'/';
     	$ruta3 = $ruta2.$semestre.'/';
     	$rutaFinal = $ruta3.$nombreArchivo;
@@ -113,6 +131,12 @@ class InstanciaAsignatura extends MY_Controller {
         $config['max_size'] = "50000";
         $config['max_width'] = "2000";
         $config['max_height'] = "2000";
+        $config['remove_spaces'] = FALSE;
+        
+        if(!file_exists($root))
+        {
+        	mkdir($root);
+        }
 		if(!file_exists($ruta))
 		{
 			mkdir($ruta);
