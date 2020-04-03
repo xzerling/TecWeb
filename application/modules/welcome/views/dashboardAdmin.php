@@ -116,30 +116,7 @@
                   </div> 
      </div> 
 
-     <div class="card" id="notificacion">
-                  <div class="face face1">
-                      <div class="content">
-                          <img src="https://www.flaticon.es/premium-icon/icons/svg/2073/2073093.svg">
-                          <h3>Notificacion</h3>
-                      </div>
-                  </div>
-                  <div class="face face2">
-                      <div class="content">
-                          <h3>Notificacion</h3>
-                          <p>Texto descriptivo </p>
-                            <!--form method="post" action="<?=base_url()?>index.php/cambio">
-                               <button type="submit">Entrar</button-->
-                               <a href="<?=base_url()?>index.php/notificacion">Entrar</a>
-                            <!--/form-->
-                      </div>
-                  </div> 
-     </div>       
-  </div>
-</div>
-
-<div id="logProfesor">
-  <div class="container">
-  <div class="card" id="administracion">
+     <div class="card" id="administracion">
                   <div class="face face1">
                       <div class="content">
                           <img src="https://image.flaticon.com/icons/svg/2345/2345403.svg">
@@ -156,9 +133,9 @@
                             <!--/form-->
                       </div>
                   </div> 
-     </div>
-   </div>
-</div>   
+     </div>      
+  </div>
+</div>  
 
 
 
