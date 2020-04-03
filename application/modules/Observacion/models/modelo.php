@@ -13,11 +13,24 @@ class modelo extends CI_Model{
 		return $resultados;
 	}
 
+	public function listarObservacionesDocente($correo){
+		$query= " select DISTINCT profesorobservacion.id, profesor.correo, alumno.nombre, alumno.matricula , profesorobservacion.comentario from profesor, alumno, profesorobservacion, profesorasignatura where profesorobservacion.refProfesor = profesor.correo and profesorobservacion.refAlumno = alumno.matricula and profesorasignatura.refProfesor = '$correo' and profesorobservacion.refProfesor = '$correo'";
+		$resultados = $this->db->query($query)->result();
+		return $resultados;
+	}
+
 	public function obtenerProfesores(){
 		$query = "select profesor.correo, profesor.nombre from profesor";
 
 		$profesores = $this->db->query($query)->result();
 		return $profesores;
+	}
+
+	public function obtenerProfesor($correo){
+		$query="select profesor.correo, profesor.nombre from profesor where profesor.correo = '$correo'";
+
+		$profesor = $this->db->query($query)->result();
+		return $profesor;
 	}
 
 	public function obtenerAlumnos(){

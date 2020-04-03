@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>Bienvenido</title>
-	<link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCdu7rmFivHO96-lkavgW2G93YH_hGBGKkIKjJ0iMLiphyeO1n" style="border-radius: 50%;">
+<link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCdu7rmFivHO96-lkavgW2G93YH_hGBGKkIKjJ0iMLiphyeO1n" style="border-radius: 50%;">
 
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"> Profesor </a>
+      <a class="navbar-brand" href="#"> <? echo $nombreBD ?> </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -119,3 +119,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+

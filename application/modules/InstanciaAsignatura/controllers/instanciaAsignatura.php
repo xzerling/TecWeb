@@ -122,6 +122,23 @@ class InstanciaAsignatura extends MY_Controller {
         }
 	}
 
+	function verDatos()
+	{
+		/*$crud = new grocery_CRUD();
+ 
+        $crud->set_table('asignatura');
+        $crud->columns('id','nombre','estado');
+        $output = $crud->render();*/
+
+        $id = $this->input->get("idInstancia");
+        $output = $this->modelo->cargarArchivos($id);
+
+		$data['tabla'] = $output;
+        
+		$this->load->view('verDatos', $data);
+
+	}
+
     function cargarAlumnos()
     {
     	$archivo = $this->input->post("form_data");
@@ -207,6 +224,102 @@ class InstanciaAsignatura extends MY_Controller {
     	$this->modelo->guardarAlumno($matricula, $nombre, $correo, $refInstAsignatura);
     	redirect(base_url('index.php/instanciaAsignatura'));
     }
+
+    function cargarArchivo()
+    {
+    	$id_asignatura_instancia = $this->input->post("idA");
+    	$nombreCurso = $this->input->post("nombreCurso");
+    	$anio = $this->input->post("anio");
+    	$semestre = $this->input->post("semestre");
+    	$nombreArchivo = $this->input->post("nombreArchivo");
+    	//$idd = 'idA';
+    	$mi_archivo = 'archivoCurso';
+    	//$mi_archivo = $this->input->post('file');
+
+    	$root = 'files/';
+    	$ruta = $root.$nombreCurso.'/';
+    	$ruta2 = $ruta.$anio.'/';
+    	$ruta3 = $ruta2.$semestre.'/';
+    	$rutaFinal = $ruta3.$nombreArchivo;
+		$archivo = $ruta.$mi_archivo;
+        $config['upload_path'] = $ruta3;
+        $config['allowed_types'] = "*";
+        $config['max_size'] = "50000";
+        $config['max_width'] = "2000";
+        $config['max_height'] = "2000";
+        $config['remove_spaces'] = FALSE;
+        
+        if(!file_exists($root))
+        {
+        	mkdir($root);
+        }
+		if(!file_exists($ruta))
+		{
+			mkdir($ruta);
+		}
+		if(!file_exists($ruta2))
+		{
+			mkdir($ruta2);
+		}
+		if(!file_exists($ruta3))
+		{
+			mkdir($ruta3);
+		}
+		if(!file_exists($mi_archivo))
+		{
+	        $this->load->library('upload', $config);
+	        
+	        if (!$this->upload->do_upload($mi_archivo)) {
+	            //*** ocurrio un error
+	            $data['uploadError'] = $this->upload->display_errors();
+	            echo $this->upload->display_errors();
+	            return;
+	        }
+		}
+		else
+		{
+			echo "Archivo ya existe";
+		}   		
+
+        $data['uploadSuccess'] = $this->upload->data();
+        $this->modelo->cargarArchivoBD($id_asignatura_instancia, $semestre, $anio, $rutaFinal);
+        $this->index();
+    }
+
+    function guardarArchivo()
+    {
+		if($_FILES["fileToUpload"]["error"]>0)
+		{
+			echo "error al cargar archivo";
+		}
+		else
+		{
+			$ruta = 'files/';
+			$archivo = $ruta.$_FILES["fileToUpload"]["name"];
+			if(!file_exists($ruta))
+			{
+				mkdir($ruta);
+			}
+			if(!file_exists($archivo))
+			{
+				$resultado = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $archivo);
+				if($resultado)
+				{
+					echo "Archivo Guardado";
+				}
+				else
+				{
+					echo "Error al guardar Archivo";
+				}
+			}
+			else
+			{
+				echo "Archivo ya existe";
+			}   		
+	    }
+    	$this->modelo->cargarArchivoServer($id_insert);
+
+	}
 }
 
 
